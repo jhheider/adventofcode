@@ -1,4 +1,4 @@
-const data = require('./day13.json')
+const data = require('./inputs/day13.json')
 
 const compute_bus = ([time, schedules]) => {
   const busses = schedules.split(',').filter(b => b !== 'x').map(b => +b)

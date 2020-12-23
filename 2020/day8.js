@@ -1,4 +1,4 @@
-const data = require('./day8.json')
+const data = require('./inputs/day8.json')
 
 const test1 = [
   ['nop', '+0'],

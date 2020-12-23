@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const { test, input } = require('./day21.json')
+const { test, input } = require('./inputs/day21.json')
 
 const parse_data = data => {
   const map = {}

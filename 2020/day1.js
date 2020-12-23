@@ -1,4 +1,4 @@
-const { test, input } = require('./day1.json')
+const { test, input } = require('./inputs/day1.json')
 
 const find_and_multiply2 = data => {
   for (let x = 0; x < data.length - 1; x++) {

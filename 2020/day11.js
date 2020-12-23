@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const input = require('./day11.json')
+const input = require('./inputs/day11.json')
 
 const occupied = (array, y, x) => x < 0 || y < 0 || x >= array[0].length || y >= array.length || array[y][x] !== '#' ? false : true
 

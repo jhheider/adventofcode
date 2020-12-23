@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const { test, input } = require('./day20.json')
+const { test, input } = require('./inputs/day20.json')
 
 const t2i = line => parseInt(line.replace(/#/g, '1').replace(/\./g, '0'), 2)
 

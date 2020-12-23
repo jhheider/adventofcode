@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const { test, input } = require('./day22.json')
+const { test, input } = require('./inputs/day22.json')
 
 const combat = input => {
   const [a, b] = [[...input[0]], [...input[1]]]

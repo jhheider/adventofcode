@@ -1,4 +1,4 @@
-const data = require('./day2.json')
+const data = require('./inputs/day2.json')
 
 var validPt1 = 0
 var validPt2 = 0

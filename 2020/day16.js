@@ -1,6 +1,6 @@
 const { values } = require('lodash')
 const _ = require('lodash')
-const data = require('./day16.json')
+const data = require('./inputs/day16.json')
 
 const valid_values = _.memoize(rules => {
   const output = new Set()

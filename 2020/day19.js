@@ -1,4 +1,4 @@
-const { tests, input } = require('./day19.json')
+const { tests, input } = require('./inputs/day19.json')
 
 const make_dictionary = rules => {
   const rules_map = new Map()

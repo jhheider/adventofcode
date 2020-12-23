@@ -1,4 +1,4 @@
-const { test, input } = require('./day23.json')
+const { test, input } = require('./inputs/day23.json')
 
 const wrapped_decrement = (numeral, size) => `${(+numeral + size - 2) % size + 1}`
 

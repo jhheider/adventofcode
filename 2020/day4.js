@@ -1,4 +1,4 @@
-const data = require('./day4.json')
+const data = require('./inputs/day4.json')
 
 const normalize_passports = data => {
   const passports = []

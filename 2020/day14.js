@@ -1,4 +1,4 @@
-const data = require('./day14.json')
+const data = require('./inputs/day14.json')
 
 const reduce_mask = mask => mask.split('').map((m, i) => [i, +m]).filter(m => !isNaN(m[1]))
 const mask_number = (memory, input, mask, total) => {

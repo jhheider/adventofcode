@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const data = require('./day6.json')
+const data = require('./inputs/day6.json')
 
 const normalize_data = data => {
   const answers = []

@@ -1,4 +1,4 @@
-const data = require('./day9.json')
+const data = require('./inputs/day9.json')
 
 const test = [
   35,

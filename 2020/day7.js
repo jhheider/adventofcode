@@ -1,4 +1,4 @@
-const data = require('./day7.json')
+const data = require('./inputs/day7.json')
 
 const tree_bags = color => {
   let contains = new Set([color])

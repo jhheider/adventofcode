@@ -1,4 +1,4 @@
-const data = require('./day12.json')
+const data = require('./inputs/day12.json')
 
 const ship = [0, 0, 90]
 const waypoint = [10, 1]

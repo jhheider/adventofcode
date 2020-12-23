@@ -1,4 +1,4 @@
-const { test, input } = require('./day17.json')
+const { test, input } = require('./inputs/day17.json')
 
 const p2a = point => point.split(':').map(n => +n)
 const a2p = array => array.join(':')

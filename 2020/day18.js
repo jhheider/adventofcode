@@ -1,4 +1,4 @@
-const { tests, inputs } = require('./day18.json')
+const { tests, inputs } = require('./inputs/day18.json')
 
 const run_tape = input => {
   const regex = /\([0-9 \+\*]{3,}\)/

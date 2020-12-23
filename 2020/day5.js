@@ -1,4 +1,4 @@
-const data = require('./day5.json')
+const data = require('./inputs/day5.json')
 
 const decode_seat = seat_code => {
   let row = 0

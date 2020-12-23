@@ -1,4 +1,4 @@
-const data = require('./day3.json')
+const data = require('./inputs/day3.json')
 
 const countTrees = ([dX, dY]) => {
   let position = [0, 0]
