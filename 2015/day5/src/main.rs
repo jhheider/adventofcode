@@ -10,14 +10,18 @@ fn main() {
     let nice = input.lines()
         .filter(|x| !blacklist.is_match(x))
         .filter(|x| vowels.find_iter(x).count() >= 3)
-        .filter(has_double_letter);
+        .filter(has_double_letter)
+        .count();
 
-    println!("Part 1: {} nice names.", nice.count());
+    assert_eq!(nice, 255);
+    println!("Part 1: {} nice names.", nice);
 
     let nice2 = input.lines()
-        .filter(nice2check);
+        .filter(nice2check)
+        .count();
 
-    println!("Part 2: {} nice names.", nice2.count());
+    assert_eq!(nice2, 55);
+    println!("Part 2: {} nice names.", nice2);
 }
 
 fn has_double_letter(name: &&str) -> bool {

@@ -13,14 +13,14 @@ fn main() {
         part1 += c.as_str().parse::<i64>().unwrap();
     }
 
-    assert_eq!(part1, 111754);
+    assert_eq!(part1, 191164);
     println!("Part 1: total = {}", part1);
 
     let json: Value = serde_json::from_str(&input).unwrap();
 
     let part2 = walk_tree(&json);
 
-    assert_eq!(part2, 65402);
+    assert_eq!(part2, 87842);
     println!("Part 2: total = {}", part2);
 }
 

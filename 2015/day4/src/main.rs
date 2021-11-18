@@ -1,5 +1,5 @@
 fn main() {
-    let input = String::from("yzbqklnj");
+    let input = String::from("iwrupvqb");
 
     let mut tail = 1;
 
@@ -13,6 +13,7 @@ fn main() {
         tail += 1;
     };
 
+    assert_eq!(tail, 346386);
     println!("Part 1: the lowest number is {}", tail);
 
     tail = 1;
@@ -27,5 +28,6 @@ fn main() {
         tail += 1;
     };
 
+    assert_eq!(tail, 9958218);
     println!("Part 2: the lowest number is {}", tail);
 }

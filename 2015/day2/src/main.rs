@@ -14,6 +14,7 @@ fn main() {
         paper += 2 * a + 2 * b + 2 * c + min(min(a, b,), c);
     }
 
+    assert_eq!(paper, 1588178);
     println!("Part 1: total square feet of paper = {}", paper);
 
     let mut ribbon = 0;
@@ -30,5 +31,6 @@ fn main() {
         ribbon += perimeter + volume;
     }
 
+    assert_eq!(ribbon, 3783758);
     println!("Part 2: total linear feet of ribbon = {}", ribbon);
 }

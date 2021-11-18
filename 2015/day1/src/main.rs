@@ -13,6 +13,7 @@ fn main() {
         };
     }
 
+    assert_eq!(floor, 280);
     println!("Part 1: final floor = {}", floor);
 
     floor = 0;
@@ -24,6 +25,7 @@ fn main() {
             _ => panic!("Bad input"),
         };
         if floor < 0 {
+            assert_eq!(i + 1, 1797);
             println!("Part 2: Entered the basement on character {}", i + 1);
             return
         }

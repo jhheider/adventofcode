@@ -2,13 +2,13 @@ use std::char;
 use fancy_regex::*;
 
 fn main() {
-    let mut input = String::from("hxbxwxba");
+    let mut input = String::from("hepxcrrq");
 
     let part1 = loop {
       input = bump(input);
       if is_valid(&input) { break input; }
     };
-    assert_eq!(part1, "hxbxxyzz");
+    assert_eq!(part1, "hepxxyzz");
     println!("Part 1: next password is {}", part1);
 
     input = part1;
@@ -18,7 +18,7 @@ fn main() {
         if is_valid(&input) { break input; }
     };
 
-    assert_eq!(part2, "hxcaabcc");
+    assert_eq!(part2, "heqaabcc");
     println!("Part 2: next password is {}", part2);
 }
 

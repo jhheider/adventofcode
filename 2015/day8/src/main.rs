@@ -6,10 +6,12 @@ fn main() {
 
     let part1 = input.lines().fold(0, |a, b| { a + decoded_savings(b) });
 
+    assert_eq!(part1, 1333);
     println!("Part 1: {} characters saved.", part1);
 
     let part2 = input.lines().fold(0, |a, b| { a + encoded_gain(b) });
 
+    assert_eq!(part2, 2046);
     println!("Part 2: {} characters added.", part2);
 }
 

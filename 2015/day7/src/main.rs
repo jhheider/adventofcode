@@ -20,6 +20,7 @@ fn main() {
 
     let part1 = get_value(&wires, "a", &mut cache);
 
+    assert_eq!(part1, 956);
     println!("Part 1: a wire is: {}", part1);
 
     cache.clear();
@@ -27,6 +28,7 @@ fn main() {
 
     let part2 = get_value(&wires, "a", &mut cache);
 
+    assert_eq!(part2, 40149);
     println!("Part 2: a wire is: {}", part2);
 }
 

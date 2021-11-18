@@ -22,6 +22,7 @@ fn main() {
 
     let lit = lights.iter().flatten().filter(|x| **x).count();
 
+    assert_eq!(lit, 377891);
     println!("Part 1: {} lights lit.", lit);
 
     let mut lights = [[0; 1000]; 1000];
@@ -42,6 +43,7 @@ fn main() {
 
     let brightness: i32 = lights.iter().flatten().sum();
 
+    assert_eq!(brightness, 14110788);
     println!("Part 2: {:?} total brightness.", brightness);
 }
 

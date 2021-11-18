@@ -13,12 +13,12 @@ fn main() {
     println!("Test: {}", test);
 
     let part1 = solve(&input, false);
-    assert_eq!(part1, 618);
+    assert_eq!(part1, 709);
 
     println!("Part 1: {}", part1);
 
     let part2 = solve(&input, true);
-    assert_eq!(part2, 601);
+    assert_eq!(part2, 668);
 
     println!("Part 2: {}", part2);
 }

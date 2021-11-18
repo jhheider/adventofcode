@@ -34,6 +34,7 @@ fn main() {
         houses.insert(position);
     }
 
+    assert_eq!(houses.len(), 2081);
     println!("Part 1: Santa visited {} houses at least once.", houses.len());
 
     let mut positions = [Position { x: 0, y: 0 }, Position { x: 0, y: 0 }];
@@ -46,5 +47,6 @@ fn main() {
         houses.insert(positions[i % 2]);
     }
 
+    assert_eq!(houses.len(), 2341);
     println!("Part 2: Santa and Robo-Santa visited {} houses at least once.", houses.len());
 }
