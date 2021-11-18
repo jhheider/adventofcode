@@ -8,12 +8,12 @@ fn main() {
 
     for command in input.lines() {
         let command = parse_command(command);
-        for x in command.1..command.2 + 1 {
-            for y in command.3..command.4 + 1 {
+        for row in lights.iter_mut().take(command.2 + 1).skip(command.1) {
+            for light in row.iter_mut().take(command.4 + 1).skip(command.3) {
                 match command.0 {
-                    "turn on" => lights[x][y] = true,
-                    "turn off" => lights[x][y] = false,
-                    "toggle" => lights[x][y] = !lights[x][y],
+                    "turn on" => *light = true,
+                    "turn off" => *light = false,
+                    "toggle" => *light = !*light,
                     _ => panic!("Bad input: {}", command.0)
                 }
             }
@@ -28,19 +28,19 @@ fn main() {
 
     for command in input.lines() {
         let command = parse_command(command);
-        for x in command.1..command.2 + 1 {
-            for y in command.3..command.4 + 1 {
+        for row in lights.iter_mut().take(command.2 + 1).skip(command.1) {
+            for light in row.iter_mut().take(command.4 + 1).skip(command.3) {
                 match command.0 {
-                    "turn on" => lights[x][y] += 1,
-                    "turn off" => if lights[x][y] > 0 { lights[x][y] -= 1 },
-                    "toggle" => lights[x][y] += 2,
+                    "turn on" => *light += 1,
+                    "turn off" => if *light > 0 { *light -= 1 },
+                    "toggle" => *light += 2,
                     _ => panic!("Bad input: {}", command.0)
                 }
             }
         }
     }
 
-    let brightness = lights.iter().flatten().fold(0, |a, b| a + b);
+    let brightness: i32 = lights.iter().flatten().sum();
 
     println!("Part 2: {:?} total brightness.", brightness);
 }

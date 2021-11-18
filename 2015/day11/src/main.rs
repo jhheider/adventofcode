@@ -11,7 +11,7 @@ fn main() {
     assert_eq!(part1, "hxbxxyzz");
     println!("Part 1: next password is {}", part1);
 
-    input = part1.clone();
+    input = part1;
     // This is definitely slow if you don't use `cargo run --release`
     let part2 = loop {
         input = bump(input);
@@ -47,7 +47,7 @@ fn bump(pw: String) -> String {
         .collect()
 }
 
-fn is_valid(pw: &String) -> bool {
+fn is_valid(pw: &str) -> bool {
     let bad_letters = Regex::new("[iol]").unwrap();
     let match_two = Regex::new(r"(.)\1.*(.)\2").unwrap();
 

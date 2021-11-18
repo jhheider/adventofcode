@@ -47,5 +47,5 @@ fn iterate(s: String) -> String {
         }
         count += 1;
     }
-    output + &count.to_string() + &last.to_string()
+    output + &count.to_string() + &last
 }

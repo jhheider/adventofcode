@@ -46,5 +46,5 @@ fn nice2check(name: &&str) -> bool {
         if chars[i] == chars[i + 2] { return true }
     }
 
-    return false
+    false
 }

@@ -12,7 +12,7 @@ fn main() {
 London to Belfast = 518
 Dublin to Belfast = 141";
 
-    let test = solve(&test);
+    let test = solve(test);
     assert_eq!(test, (605, 982));
 
     let part1 = solve(&input);
@@ -28,7 +28,7 @@ fn solve(list: &str) -> (u32, u32) {
 
     for l in list.lines() {
         let r = Regex::new(r"(.*) to (.*) = ([0-9]+)").unwrap();
-        let caps = r.captures(&l).unwrap();
+        let caps = r.captures(l).unwrap();
 
         let a = caps.get(1).unwrap().as_str();
         let b = caps.get(2).unwrap().as_str();

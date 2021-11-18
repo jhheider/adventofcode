@@ -15,9 +15,9 @@ fn main() {
 
 fn decoded_savings(s: &str) -> usize {
     let escape = Regex::new(r#"\\([\\"])|\\x([0-9a-zA-Z]{2})"#).unwrap();
-    let memory = escape.replace_all(&s, "a").to_string();
+    let memory = escape.replace_all(s, "a").to_string();
 
     s.len() - memory.len() + 2
 }
 
-fn encoded_gain(s: &str) -> usize { s.matches("\\").count() + s.matches("\"").count() + 2 }
+fn encoded_gain(s: &str) -> usize { s.matches('\\').count() + s.matches('\"').count() + 2 }

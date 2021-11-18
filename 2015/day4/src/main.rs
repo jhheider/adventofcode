@@ -1,5 +1,3 @@
-use md5;
-
 fn main() {
     let input = String::from("yzbqklnj");
 
