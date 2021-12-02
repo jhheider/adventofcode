@@ -1,3 +1,5 @@
+use std::env;
+
 mod day1;
 mod day2;
 mod day3;
@@ -25,29 +27,39 @@ mod day24;
 mod day25;
 
 fn main() {
-    day1::main();
-    day2::main();
-    day3::main();
-    day4::main();
-    day5::main();
-    day6::main();
-    day7::main();
-    day8::main();
-    day9::main();
-    day10::main();
-    day11::main();
-    day12::main();
-    day13::main();
-    day14::main();
-    day15::main();
-    day16::main();
-    day17::main();
-    day18::main();
-    day19::main();
-    day20::main();
-    day21::main();
-    day22::main();
-    day23::main();
-    day24::main();
-    day25::main();
+    let days = [day1::main,
+        day2::main,
+        day3::main,
+        day4::main,
+        day5::main,
+        day6::main,
+        day7::main,
+        day8::main,
+        day9::main,
+        day10::main,
+        day11::main,
+        day12::main,
+        day13::main,
+        day14::main,
+        day15::main,
+        day16::main,
+        day17::main,
+        day18::main,
+        day19::main,
+        day20::main,
+        day21::main,
+        day22::main,
+        day23::main,
+        day24::main,
+        day25::main];
+
+    match env::args().collect::<Vec<String>>().get(1) {
+        Some(n) => days[n.parse::<usize>().unwrap() - 1](),
+        None => {
+            for func in days.iter() {
+                func()
+            }
+            return
+        },
+    };
 }
