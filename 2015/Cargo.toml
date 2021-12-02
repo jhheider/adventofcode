@@ -1,0 +1,13 @@
+[package]
+name = "aoc2015"
+version = "0.1.0"
+authors = ["Jacob Heider <jhheider@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fancy-regex = "0.7.1"
+md5 = "^0.7.0"
+regex = "^1.5.4"
+serde_json = "1.0"
