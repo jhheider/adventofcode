@@ -1,3 +1,1 @@
-pub fn main() {
-  return
-}
+pub fn main() {}
