@@ -1,7 +1,8 @@
-use std::{fs, collections::HashMap};
+use std::{collections::HashMap, fs};
 
 enum ReducerType {
-  O2, CO2
+  O2,
+  CO2,
 }
 
 pub fn main() {
@@ -16,7 +17,8 @@ pub fn main() {
 10000
 11001
 00010
-01010".to_string();
+01010"
+    .to_string();
   let input = fs::read_to_string("data/day3.txt").unwrap();
 
   let test1 = episilon_gamma(&test);
@@ -44,7 +46,9 @@ fn episilon_gamma(input: &str) -> i32 {
   for line in input.lines() {
     length = line.len();
     for (pos, bit) in line.chars().enumerate() {
-      if bit == '1' { ones.insert(pos, ones.get(&pos).unwrap_or(&0) + 1); }
+      if bit == '1' {
+        ones.insert(pos, ones.get(&pos).unwrap_or(&0) + 1);
+      }
     }
   }
 
@@ -56,7 +60,7 @@ fn episilon_gamma(input: &str) -> i32 {
       true => {
         gamma += "1";
         epsilon += "0";
-      },
+      }
       false => {
         gamma += "0";
         epsilon += "1";
@@ -81,11 +85,19 @@ fn o2_co2_reducer(input: &str, rt: ReducerType) -> &str {
   let mut values = input.lines().collect::<Vec<&str>>();
 
   for pos in 0..values[0].len() {
-    if values.len() == 1 { break; }
+    if values.len() == 1 {
+      break;
+    }
 
     let ones = values
       .iter()
-      .map(|v| v.chars().collect::<Vec<char>>().get(pos).unwrap().to_owned())
+      .map(|v| {
+        v.chars()
+          .collect::<Vec<char>>()
+          .get(pos)
+          .unwrap()
+          .to_owned()
+      })
       .filter(|bit| *bit == '1')
       .count();
     let comparison = match rt {
@@ -96,7 +108,10 @@ fn o2_co2_reducer(input: &str, rt: ReducerType) -> &str {
       true => '1',
       false => '0',
     };
-    values = values.into_iter().filter(|v| v.chars().collect::<Vec<char>>().get(pos).unwrap() == &filter_value).collect();
+    values = values
+      .into_iter()
+      .filter(|v| v.chars().collect::<Vec<char>>().get(pos).unwrap() == &filter_value)
+      .collect();
   }
 
   values.get(0).unwrap()

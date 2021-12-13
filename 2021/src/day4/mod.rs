@@ -1,4 +1,4 @@
-use std::{cmp::max, fs, collections::HashSet};
+use std::{cmp::max, collections::HashSet, fs};
 
 pub fn main() {
   let (test_moves, test_boards) = load("data/day4test.txt");
@@ -44,7 +44,7 @@ fn load(file: &str) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
           .unwrap()
           .split_whitespace()
           .map(|i| i.parse::<i32>().unwrap())
-          .collect::<Vec<i32>>()
+          .collect::<Vec<i32>>(),
       );
     }
     boards.push(board);
@@ -60,24 +60,25 @@ fn run(moves: &[i32], boards: &[Vec<Vec<i32>>]) -> Result<(i32, i32), ()> {
     for (board_num, board) in boards.iter_mut().enumerate() {
       for row in board.iter_mut() {
         for cell in row.iter_mut() {
-          if cell == num { *cell = -1; }
+          if cell == num {
+            *cell = -1;
+          }
         }
       }
 
       for x in 0..5 {
-        if (board[x].iter().sum::<i32>() == -5) ||
-          (board.iter().map(|row| row[x]).sum::<i32>() == -5) {
-            return Ok((
-              board_num as i32 + 1,
-              board
-                .iter()
-                .map(|row|
-                  row
-                    .iter()
-                    .map(|i| max(*i, 0))
-                    .sum::<i32>())
-                .sum::<i32>() * num))
-          }
+        if (board[x].iter().sum::<i32>() == -5)
+          || (board.iter().map(|row| row[x]).sum::<i32>() == -5)
+        {
+          return Ok((
+            board_num as i32 + 1,
+            board
+              .iter()
+              .map(|row| row.iter().map(|i| max(*i, 0)).sum::<i32>())
+              .sum::<i32>()
+              * num,
+          ));
+        }
       }
     }
   }
@@ -92,15 +93,18 @@ fn run2(moves: &[i32], boards: &[Vec<Vec<i32>>]) -> Result<i32, ()> {
     for (board_num, board) in boards.iter_mut().enumerate() {
       for row in board.iter_mut() {
         for cell in row.iter_mut() {
-          if cell == num { *cell = -1; }
+          if cell == num {
+            *cell = -1;
+          }
         }
       }
 
       for x in 0..5 {
-        if (board[x].iter().sum::<i32>() == -5) ||
-          (board.iter().map(|row| row[x]).sum::<i32>() == -5) {
-            winners.insert(board_num);
-          }
+        if (board[x].iter().sum::<i32>() == -5)
+          || (board.iter().map(|row| row[x]).sum::<i32>() == -5)
+        {
+          winners.insert(board_num);
+        }
       }
     }
     if (boards.len() == 1) && (winners.len() == 1) {
@@ -108,14 +112,12 @@ fn run2(moves: &[i32], boards: &[Vec<Vec<i32>>]) -> Result<i32, ()> {
       return Ok(
         board
           .iter()
-          .map(|row|
-            row
-              .iter()
-              .map(|i| max(*i, 0))
-              .sum::<i32>())
-          .sum::<i32>() * num)
+          .map(|row| row.iter().map(|i| max(*i, 0)).sum::<i32>())
+          .sum::<i32>()
+          * num,
+      );
     } else if boards.is_empty() {
-      return Err(())
+      return Err(());
     } else {
       boards = boards
         .iter()

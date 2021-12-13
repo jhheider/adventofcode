@@ -1,7 +1,11 @@
-use std::{fs, collections::{HashMap, HashSet}};
+use std::{
+  collections::{HashMap, HashSet},
+  fs,
+};
 
 pub fn main() {
-  let test = parse_input(r"be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+  let test = parse_input(
+    r"be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
 fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
 fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
@@ -10,17 +14,24 @@ fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fad
 dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
 bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
 egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
-gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce");
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce",
+  );
   let input_file = fs::read_to_string("data/day8.txt").unwrap();
   let input = parse_input(&input_file);
 
   let test1 = count_1478(&test);
   assert_eq!(test1, 26);
-  println!("Day 8: Test 1: digits 1, 4, 7, and 8 appear {} times in the output", test1);
+  println!(
+    "Day 8: Test 1: digits 1, 4, 7, and 8 appear {} times in the output",
+    test1
+  );
 
   let part1 = count_1478(&input);
   assert_eq!(part1, 543);
-  println!("Day 8: Part 1: digits 1, 4, 7, and 8 appear {} times in the output", part1);
+  println!(
+    "Day 8: Part 1: digits 1, 4, 7, and 8 appear {} times in the output",
+    part1
+  );
 
   let test2 = figure_outputs(&test);
   assert_eq!(test2, 61229);
@@ -34,21 +45,31 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 fn parse_input(input: &str) -> Vec<Vec<Vec<HashSet<char>>>> {
   input
     .lines()
-    .map(|line| line.split(" | ")
-      .map(|split| split.split_whitespace()
-        .map(|display| display.chars().collect::<HashSet<char>>())
-        .collect::<Vec<HashSet<char>>>())
-      .collect::<Vec<Vec<HashSet<char>>>>())
+    .map(|line| {
+      line
+        .split(" | ")
+        .map(|split| {
+          split
+            .split_whitespace()
+            .map(|display| display.chars().collect::<HashSet<char>>())
+            .collect::<Vec<HashSet<char>>>()
+        })
+        .collect::<Vec<Vec<HashSet<char>>>>()
+    })
     .collect::<Vec<Vec<Vec<HashSet<char>>>>>()
 }
 
 fn count_1478(input: &[Vec<Vec<HashSet<char>>>]) -> i32 {
-  input.iter()
-    .map(|line| line[1].iter()
-      .fold(0, |sum, value| {
-        if [2, 3, 4, 7].contains(&value.len()) { return sum + 1 }
+  input
+    .iter()
+    .map(|line| {
+      line[1].iter().fold(0, |sum, value| {
+        if [2, 3, 4, 7].contains(&value.len()) {
+          return sum + 1;
+        }
         sum
-      }))
+      })
+    })
     .sum()
 }
 
@@ -62,7 +83,12 @@ fn figure_outputs(input: &[Vec<Vec<HashSet<char>>>]) -> i32 {
       solutions.insert(7, row[0].iter().find(|v| v.len() == 3).unwrap());
       solutions.insert(8, row[0].iter().find(|v| v.len() == 7).unwrap());
 
-      let fourdiff = solutions.get(&4).unwrap().difference(solutions.get(&1).unwrap()).copied().collect::<HashSet<char>>();
+      let fourdiff = solutions
+        .get(&4)
+        .unwrap()
+        .difference(solutions.get(&1).unwrap())
+        .copied()
+        .collect::<HashSet<char>>();
 
       for i in &row[0] {
         match i.len() {
@@ -75,7 +101,7 @@ fn figure_outputs(input: &[Vec<Vec<HashSet<char>>>]) -> i32 {
             } else {
               solutions.insert(2, i);
             }
-          },
+          }
           6 => {
             if solutions.get(&4).unwrap().difference(i).count() == 0 {
               solutions.insert(9, i);
@@ -84,15 +110,21 @@ fn figure_outputs(input: &[Vec<Vec<HashSet<char>>>]) -> i32 {
             } else {
               solutions.insert(0, i);
             }
-          },
+          }
           _ => panic!("Bad input! {:?}", i),
         }
       }
 
       row[1].iter().fold(0, |sum, value| {
-        10 * sum + solutions.iter().find(|solution| {
-          (solution.1.difference(value).count() == 0) && (value.difference(solution.1).count() == 0)
-        }).unwrap().0
+        10 * sum
+          + solutions
+            .iter()
+            .find(|solution| {
+              (solution.1.difference(value).count() == 0)
+                && (value.difference(solution.1).count() == 0)
+            })
+            .unwrap()
+            .0
       })
     })
     .sum()

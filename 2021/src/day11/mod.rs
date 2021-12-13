@@ -12,9 +12,12 @@ pub fn main() {
 4846848554
 5283751526"
     .lines()
-    .map(|line| line.chars()
-      .map(|c| c.to_digit(10).unwrap() as i32)
-      .collect::<Vec<i32>>())
+    .map(|line| {
+      line
+        .chars()
+        .map(|c| c.to_digit(10).unwrap() as i32)
+        .collect::<Vec<i32>>()
+    })
     .collect::<Vec<Vec<i32>>>();
   let input = r"1224346384
 5621128587
@@ -27,9 +30,12 @@ pub fn main() {
 3185643871
 2224876627"
     .lines()
-    .map(|line| line.chars()
-      .map(|c| c.to_digit(10).unwrap() as i32)
-      .collect::<Vec<i32>>())
+    .map(|line| {
+      line
+        .chars()
+        .map(|c| c.to_digit(10).unwrap() as i32)
+        .collect::<Vec<i32>>()
+    })
     .collect::<Vec<Vec<i32>>>();
 
   let test1 = flash(&test, 100);
@@ -71,11 +77,12 @@ fn flash(input: &[Vec<i32>], steps: u32) -> u32 {
             flashed = true;
             for dy in -1..=1 {
               for dx in -1..=1 {
-                if ((y as i32 + dy) >= 0) &&
-                  ((y as i32 + dy) <= 9) &&
-                  ((x as i32 + dx) >= 0) &&
-                  ((x as i32 + dx) <= 9) {
-                    state[(y as i32 + dy) as usize][(x as i32 + dx) as usize] += 1;
+                if ((y as i32 + dy) >= 0)
+                  && ((y as i32 + dy) <= 9)
+                  && ((x as i32 + dx) >= 0)
+                  && ((x as i32 + dx) <= 9)
+                {
+                  state[(y as i32 + dy) as usize][(x as i32 + dx) as usize] += 1;
                 }
               }
             }
@@ -83,11 +90,17 @@ fn flash(input: &[Vec<i32>], steps: u32) -> u32 {
         }
       }
     }
-    state = state.iter().map(|line| line.iter().map(|cell| max(*cell, 0)).collect()).collect();
+    state = state
+      .iter()
+      .map(|line| line.iter().map(|cell| max(*cell, 0)).collect())
+      .collect();
 
-    if state.iter()
+    if state
+      .iter()
       .map(|line| line.iter().sum::<i32>())
-      .sum::<i32>() == 0 {
+      .sum::<i32>()
+      == 0
+    {
       return step + 1;
     }
   }

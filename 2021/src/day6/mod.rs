@@ -1,8 +1,15 @@
 use std::fs;
 
 pub fn main() {
-  let test = "3,4,3,1,2".split(',').map(|s| s.parse::<u64>().unwrap()).collect::<Vec<u64>>();
-  let input = fs::read_to_string("data/day6.txt").unwrap().split(',').map(|s| s.parse::<u64>().unwrap()).collect::<Vec<u64>>();
+  let test = "3,4,3,1,2"
+    .split(',')
+    .map(|s| s.parse::<u64>().unwrap())
+    .collect::<Vec<u64>>();
+  let input = fs::read_to_string("data/day6.txt")
+    .unwrap()
+    .split(',')
+    .map(|s| s.parse::<u64>().unwrap())
+    .collect::<Vec<u64>>();
 
   let test1a = run(&test, 18);
   assert_eq!(test1a, 26);
@@ -40,7 +47,7 @@ fn run(input: &[u64], days: u64) -> u64 {
         0 => {
           next_state[6] = state[0];
           next_state[8] = state[0];
-        },
+        }
         _ => {
           next_state[day - 1] += state[day];
         }

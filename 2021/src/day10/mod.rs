@@ -2,7 +2,8 @@ use core::panic;
 use std::fs;
 
 pub fn main() {
-  let test = parse_input(r"[({(<(())[]>[[{[]{<()<>>
+  let test = parse_input(
+    r"[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(
 {([(<{}[<>[]}>{[]{[(<()>
 (((({<>}<{<{<>}{[]{[]{}
@@ -11,7 +12,8 @@ pub fn main() {
 {<[[]]>}<{[{[{[]{()[[[]
 [<(<(<(<{}))><([]([]()
 <{([([[(<>()){}]>(<<{{
-<{([{{}}[<[[[<>{}]]]>[]]");
+<{([{{}}[<[[[<>{}]]]>[]]",
+  );
   let input = parse_input(&fs::read_to_string("data/day10.txt").unwrap());
 
   let test1 = score_corrupted(&test);
@@ -51,28 +53,28 @@ fn score_corrupted(input: &[Vec<char>]) -> i32 {
                 score += 3;
                 continue 'outer;
               }
-            },
+            }
             ']' => {
               if last != '[' {
                 score += 57;
                 continue 'outer;
               }
-            },
+            }
             '}' => {
               if last != '{' {
                 score += 1197;
                 continue 'outer;
               }
-            },
+            }
             '>' => {
               if last != '<' {
                 score += 25137;
                 continue 'outer;
               }
-            },
+            }
             _ => panic!("Bad input character: {}", c),
           }
-        },
+        }
         _ => panic!("Bad input character: {}", c),
       }
     }
@@ -91,25 +93,42 @@ fn score_incomplete(input: &[Vec<char>]) -> i64 {
         ']' | ')' | '>' | '}' => {
           let last = stack.pop().unwrap();
           match c {
-            ')' => if last != '(' { continue 'outer },
-            ']' => if last != '[' { continue 'outer },
-            '}' => if last != '{' { continue 'outer },
-            '>' => if last != '<' { continue 'outer },
+            ')' => {
+              if last != '(' {
+                continue 'outer;
+              }
+            }
+            ']' => {
+              if last != '[' {
+                continue 'outer;
+              }
+            }
+            '}' => {
+              if last != '{' {
+                continue 'outer;
+              }
+            }
+            '>' => {
+              if last != '<' {
+                continue 'outer;
+              }
+            }
             _ => panic!("Bad input character: {}", c),
           }
-        },
+        }
         _ => panic!("Bad input character: {}", c),
       }
     }
     stack.reverse();
     scores.push(stack.iter().fold(0, |sum, value| {
-      sum * 5 + match value {
-        '(' => 1,
-        '[' => 2,
-        '{' => 3,
-        '<' => 4,
-        _ => panic!("Bad input character: {}", value),
-      }
+      sum * 5
+        + match value {
+          '(' => 1,
+          '[' => 2,
+          '{' => 3,
+          '<' => 4,
+          _ => panic!("Bad input character: {}", value),
+        }
     }))
   }
   scores.sort_unstable();

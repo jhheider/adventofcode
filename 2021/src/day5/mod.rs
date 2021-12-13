@@ -1,10 +1,13 @@
-use std::{collections::HashMap, fs, cmp::{min, max}};
 use num::abs;
 use regex::Regex;
+use std::{
+  cmp::{max, min},
+  collections::HashMap,
+  fs,
+};
 
 // This is safe to ignore at this time.
 #[allow(clippy::derive_hash_xor_eq)]
-
 #[derive(Debug, Eq, Hash, Clone, Copy)]
 struct Point {
   x: i32,
@@ -24,7 +27,8 @@ struct Line {
 }
 
 pub fn main() {
-  let test = lines(r"0,9 -> 5,9
+  let test = lines(
+    r"0,9 -> 5,9
 8,0 -> 0,8
 9,4 -> 3,4
 2,2 -> 2,1
@@ -33,7 +37,8 @@ pub fn main() {
 0,9 -> 2,9
 3,4 -> 1,4
 0,0 -> 8,8
-5,5 -> 8,2");
+5,5 -> 8,2",
+  );
   let input = lines(&fs::read_to_string("data/day5.txt").unwrap());
 
   let test1 = overlaps(&test, false);
@@ -62,10 +67,12 @@ fn lines(input: &str) -> Vec<Line> {
       Line {
         start: Point {
           x: caps.get(1).unwrap().as_str().parse::<i32>().unwrap(),
-          y: caps.get(2).unwrap().as_str().parse::<i32>().unwrap() },
+          y: caps.get(2).unwrap().as_str().parse::<i32>().unwrap(),
+        },
         end: Point {
           x: caps.get(3).unwrap().as_str().parse::<i32>().unwrap(),
-          y: caps.get(4).unwrap().as_str().parse::<i32>().unwrap() },
+          y: caps.get(4).unwrap().as_str().parse::<i32>().unwrap(),
+        },
       }
     })
     .collect::<Vec<Line>>()
@@ -89,14 +96,16 @@ fn overlaps(lines: &[Line], with_diagonals: bool) -> usize {
       let steps = (line.end.x - line.start.x, line.end.y - line.start.y);
       for increment in 0..=abs(steps.0) {
         let new_point = Point {
-          x: line.start.x + match steps.0 > 0 {
-            true => increment,
-            false => -increment,
-          },
-          y: line.start.y + match steps.1 > 0 {
+          x: line.start.x
+            + match steps.0 > 0 {
               true => increment,
               false => -increment,
-          }
+            },
+          y: line.start.y
+            + match steps.1 > 0 {
+              true => increment,
+              false => -increment,
+            },
         };
         points.insert(new_point, points.get(&new_point).unwrap_or(&0u32) + 1);
       }
