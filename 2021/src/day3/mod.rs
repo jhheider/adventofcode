@@ -108,11 +108,8 @@ fn o2_co2_reducer(input: &str, rt: ReducerType) -> &str {
       true => '1',
       false => '0',
     };
-    values = values
-      .into_iter()
-      .filter(|v| v.chars().collect::<Vec<char>>().get(pos).unwrap() == &filter_value)
-      .collect();
+    values.retain(|v| v.chars().collect::<Vec<char>>().get(pos).unwrap() == &filter_value);
   }
 
-  values.get(0).unwrap()
+  values.first().unwrap()
 }
