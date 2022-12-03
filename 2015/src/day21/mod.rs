@@ -199,6 +199,7 @@ fn dpr(pc: &Character, boss: &Character) -> (i32, i32) {
     )
 }
 
+#[allow(unstable_name_collisions)]
 fn rounds_to_win(pc: &Character, boss: &Character) -> Option<i32> {
     let damage_per_round = dpr(pc, boss);
     let pc_rounds_to_win = boss.hp.div_ceil(&damage_per_round.0);
