@@ -1,5 +1,5 @@
-use std::fs;
 use std::cmp::min;
+use std::fs;
 
 pub fn main() {
     let input = fs::read_to_string("data/day2.txt").unwrap();
@@ -7,11 +7,14 @@ pub fn main() {
     let mut paper = 0;
 
     for present in input.lines() {
-        let dims: Vec<i32> = present.split('x').map(|x| x.parse::<i32>().unwrap()).collect();
-        let a = dims.get(0).unwrap() * dims.get(1).unwrap();
+        let dims: Vec<i32> = present
+            .split('x')
+            .map(|x| x.parse::<i32>().unwrap())
+            .collect();
+        let a = dims.first().unwrap() * dims.get(1).unwrap();
         let b = dims.get(1).unwrap() * dims.get(2).unwrap();
-        let c = dims.get(2).unwrap() * dims.get(0).unwrap();
-        paper += 2 * a + 2 * b + 2 * c + min(min(a, b,), c);
+        let c = dims.get(2).unwrap() * dims.first().unwrap();
+        paper += 2 * a + 2 * b + 2 * c + min(min(a, b), c);
     }
 
     assert_eq!(paper, 1588178);
@@ -20,8 +23,11 @@ pub fn main() {
     let mut ribbon = 0;
 
     for present in input.lines() {
-        let dims: Vec<i32> = present.split('x').map(|x| x.parse::<i32>().unwrap()).collect();
-        let a = dims.get(0).unwrap();
+        let dims: Vec<i32> = present
+            .split('x')
+            .map(|x| x.parse::<i32>().unwrap())
+            .collect();
+        let a = dims.first().unwrap();
         let b = dims.get(1).unwrap();
         let c = dims.get(2).unwrap();
 

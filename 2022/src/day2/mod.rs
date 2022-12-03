@@ -60,7 +60,7 @@ impl Move {
     }
   }
 
-  fn to_outcome(&self, player: &Move) -> Move {
+  fn to_outcome(self, player: &Move) -> Move {
     match self {
       Move::Rock => match player {
         Move::Rock => Move::Scissor,
