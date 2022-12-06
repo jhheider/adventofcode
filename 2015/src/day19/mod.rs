@@ -1,5 +1,5 @@
-use std::{fs, collections::HashSet};
 use regex::Regex;
+use std::{collections::HashSet, fs};
 
 pub fn main() {
     let test_rules: Vec<(String, String)> = vec![
@@ -7,7 +7,7 @@ pub fn main() {
         ("e".to_string(), "O".to_string()),
         ("H".to_string(), "HO".to_string()),
         ("H".to_string(), "OH".to_string()),
-        ("O".to_string(), "HH".to_string())
+        ("O".to_string(), "HH".to_string()),
     ];
     let test_input = "HOH";
     let test1 = permutations(test_input, &test_rules).len();
@@ -51,10 +51,16 @@ fn permutations(input: &str, rules: &[(String, String)]) -> HashSet<String> {
 
 fn load_rules(file: &str) -> Vec<(String, String)> {
     let input = fs::read_to_string(file).unwrap();
-    input.lines().map(|line| {
-        let mut splits = line.split(" => ");
-        (splits.next().unwrap().to_owned(), splits.next().unwrap().to_owned())
-    }).collect()
+    input
+        .lines()
+        .map(|line| {
+            let mut splits = line.split(" => ");
+            (
+                splits.next().unwrap().to_owned(),
+                splits.next().unwrap().to_owned(),
+            )
+        })
+        .collect()
 }
 
 fn find_solution(input: &str) -> usize {

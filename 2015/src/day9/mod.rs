@@ -1,9 +1,9 @@
-use std::{
-        fs,
-        cmp::{min, max},
-        collections::{HashMap, HashSet},
-};
 use regex::Regex;
+use std::{
+    cmp::{max, min},
+    collections::{HashMap, HashSet},
+    fs,
+};
 
 pub fn main() {
     let input = fs::read_to_string("data/day9.txt").unwrap();
@@ -44,14 +44,23 @@ fn solve(list: &str) -> (u32, u32) {
     solve_rec(&nodes, &edges, "#", HashSet::new())
 }
 
-fn solve_rec(nodes: &HashSet<&str>, edges: &HashMap<(&str, &str), u32>, start: &str, visited: HashSet<&str>) -> (u32, u32) {
-    if visited.len() == nodes.len() { return (0, 0) }
+fn solve_rec(
+    nodes: &HashSet<&str>,
+    edges: &HashMap<(&str, &str), u32>,
+    start: &str,
+    visited: HashSet<&str>,
+) -> (u32, u32) {
+    if visited.len() == nodes.len() {
+        return (0, 0);
+    }
 
     let mut min0 = u32::MAX;
     let mut max0 = 0;
 
     for node in nodes.iter() {
-        if visited.contains(node) { continue }
+        if visited.contains(node) {
+            continue;
+        }
 
         let mut visited = visited.clone();
 

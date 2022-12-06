@@ -2,7 +2,9 @@ use std::cmp::min;
 
 pub fn main() {
     let test = vec![20, 15, 10, 5, 5];
-    let containers = vec![11, 30, 47, 31, 32, 36, 3, 1, 5, 3, 32, 36, 15, 11, 46, 26, 28, 1, 19, 3];
+    let containers = vec![
+        11, 30, 47, 31, 32, 36, 3, 1, 5, 3, 32, 36, 15, 11, 46, 26, 28, 1, 19, 3,
+    ];
 
     let test_out = solve(test, 25);
     assert_eq!(test_out.0, 4);
@@ -38,7 +40,9 @@ fn solve(containers: Vec<i32>, volume: i32) -> (usize, i32) {
     }
 
     let permutations = solutions.iter().fold(0, |total, used| {
-        if *used == least { return total + 1 }
+        if *used == least {
+            return total + 1;
+        }
         total
     });
     (solutions.len(), permutations)

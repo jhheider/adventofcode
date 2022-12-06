@@ -1,5 +1,5 @@
-use std::fs;
 use regex::Regex;
+use std::fs;
 
 pub fn main() {
     let input = fs::read_to_string("data/day6.txt").unwrap();
@@ -14,7 +14,7 @@ pub fn main() {
                     "turn on" => *light = true,
                     "turn off" => *light = false,
                     "toggle" => *light = !*light,
-                    _ => panic!("Bad input: {}", command.0)
+                    _ => panic!("Bad input: {}", command.0),
                 }
             }
         }
@@ -33,9 +33,13 @@ pub fn main() {
             for light in row.iter_mut().take(command.4 + 1).skip(command.3) {
                 match command.0 {
                     "turn on" => *light += 1,
-                    "turn off" => if *light > 0 { *light -= 1 },
+                    "turn off" => {
+                        if *light > 0 {
+                            *light -= 1
+                        }
+                    }
                     "toggle" => *light += 2,
-                    _ => panic!("Bad input: {}", command.0)
+                    _ => panic!("Bad input: {}", command.0),
                 }
             }
         }

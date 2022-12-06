@@ -1,6 +1,6 @@
-use std::fs;
-use std::collections::HashMap;
 use regex::Regex;
+use std::collections::HashMap;
+use std::fs;
 
 #[derive(Debug)]
 enum Signal {
@@ -34,7 +34,8 @@ pub fn main() {
 
 fn parse_input(input: String) -> HashMap<String, Signal> {
     let signal = Regex::new(r"^([0-9a-z]+) -> ([a-z]+)$").unwrap();
-    let binary = Regex::new(r"^([a-z0-9]+) (AND|OR|LSHIFT|RSHIFT) ([a-z0-9]+) -> ([a-z]+)$").unwrap();
+    let binary =
+        Regex::new(r"^([a-z0-9]+) (AND|OR|LSHIFT|RSHIFT) ([a-z0-9]+) -> ([a-z]+)$").unwrap();
     let unary = Regex::new(r"^NOT ([a-z]+) -> ([a-z]+)$").unwrap();
 
     let mut wires = HashMap::new();
@@ -70,16 +71,22 @@ fn get_value(wires: &HashMap<String, Signal>, key: &str, cache: &mut HashMap<Str
     let value = match key.parse() {
         Ok(value) => value,
         Err(_) => {
-            if let Some(value) = cache.get(key) { return *value }
+            if let Some(value) = cache.get(key) {
+                return *value;
+            }
             match wires.get(key).unwrap() {
                 Signal::Value(value) => get_value(wires, value, cache),
-                Signal::And(left, right) => get_value(wires, left, cache) & get_value(wires, right, cache),
-                Signal::Or(left, right) => get_value(wires, left, cache) | get_value(wires, right, cache),
+                Signal::And(left, right) => {
+                    get_value(wires, left, cache) & get_value(wires, right, cache)
+                }
+                Signal::Or(left, right) => {
+                    get_value(wires, left, cache) | get_value(wires, right, cache)
+                }
                 Signal::LShift(left, shift) => get_value(wires, left, cache) << shift,
                 Signal::RShift(left, shift) => get_value(wires, left, cache) >> shift,
                 Signal::Not(left) => !get_value(wires, left, cache),
             }
-        },
+        }
     };
     cache.insert(key.to_string(), value);
     value

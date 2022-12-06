@@ -1,6 +1,6 @@
-use std::fs;
 use std::cmp::Eq;
 use std::collections::HashSet;
+use std::fs;
 
 #[derive(Hash, Eq, PartialEq, Debug, Copy, Clone)]
 struct Position {
@@ -11,10 +11,22 @@ struct Position {
 impl Position {
     fn next(self, dir: char) -> Position {
         match dir {
-            '^' => Position { x: self.x, y: self.y + 1 },
-            'v' => Position { x: self.x, y: self.y - 1 },
-            '<' => Position { x: self.x - 1, y: self.y },
-            '>' => Position { x: self.x + 1, y: self.y },
+            '^' => Position {
+                x: self.x,
+                y: self.y + 1,
+            },
+            'v' => Position {
+                x: self.x,
+                y: self.y - 1,
+            },
+            '<' => Position {
+                x: self.x - 1,
+                y: self.y,
+            },
+            '>' => Position {
+                x: self.x + 1,
+                y: self.y,
+            },
             _ => panic!("Bad input"),
         }
     }
@@ -35,7 +47,10 @@ pub fn main() {
     }
 
     assert_eq!(houses.len(), 2081);
-    println!("Day 3: Part 1: Santa visited {} houses at least once.", houses.len());
+    println!(
+        "Day 3: Part 1: Santa visited {} houses at least once.",
+        houses.len()
+    );
 
     let mut positions = [Position { x: 0, y: 0 }, Position { x: 0, y: 0 }];
 
@@ -48,5 +63,8 @@ pub fn main() {
     }
 
     assert_eq!(houses.len(), 2341);
-    println!("Day 3: Part 2: Santa and Robo-Santa visited {} houses at least once.", houses.len());
+    println!(
+        "Day 3: Part 2: Santa and Robo-Santa visited {} houses at least once.",
+        houses.len()
+    );
 }

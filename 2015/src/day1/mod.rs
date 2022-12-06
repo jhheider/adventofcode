@@ -27,7 +27,7 @@ pub fn main() {
         if floor < 0 {
             assert_eq!(i + 1, 1797);
             println!("Day 1: Part 2: Entered the basement on character {}", i + 1);
-            return
+            return;
         }
     }
 }

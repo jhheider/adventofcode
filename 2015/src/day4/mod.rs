@@ -11,7 +11,7 @@ pub fn main() {
         }
 
         tail += 1;
-    };
+    }
 
     assert_eq!(tail, 346386);
     println!("Day 4: Part 1: the lowest number is {}", tail);
@@ -26,7 +26,7 @@ pub fn main() {
         }
 
         tail += 1;
-    };
+    }
 
     assert_eq!(tail, 9958218);
     println!("Day 4: Part 2: the lowest number is {}", tail);

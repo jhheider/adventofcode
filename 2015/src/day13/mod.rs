@@ -1,11 +1,10 @@
-use std::fs;
-use std::collections::{HashMap, HashSet};
 use regex::Regex;
+use std::collections::{HashMap, HashSet};
+use std::fs;
 
 pub fn main() {
     let input = fs::read_to_string("data/day13.txt").unwrap();
     let test = fs::read_to_string("data/day13test.txt").unwrap();
-
 
     let test = solve(&test, false);
     assert_eq!(test, 330);
@@ -24,7 +23,9 @@ pub fn main() {
 }
 
 fn solve(input: &str, part2: bool) -> i64 {
-    let parser = Regex::new("(.*) would (gain|lose) ([0-9]+) happiness units by sitting next to (.*)\\.").unwrap();
+    let parser =
+        Regex::new("(.*) would (gain|lose) ([0-9]+) happiness units by sitting next to (.*)\\.")
+            .unwrap();
 
     let mut happiness = HashMap::new();
     let mut people = HashSet::new();
@@ -51,7 +52,9 @@ fn solve(input: &str, part2: bool) -> i64 {
         happiness.insert((b, "you"), 0);
     }
 
-    if part2 { people.insert("you"); }
+    if part2 {
+        people.insert("you");
+    }
 
     let pivot = people.iter().next().unwrap();
     let mut found = HashSet::<&str>::new();
@@ -60,7 +63,13 @@ fn solve(input: &str, part2: bool) -> i64 {
     find_max(&happiness, &people, pivot, pivot, &mut found)
 }
 
-fn find_max<'a>(happiness: &HashMap<(&'a str, &'a str), i64>, people: &HashSet<&'a str>, start: &'a str, pivot: &'a str, found: &mut HashSet<&'a str>) -> i64 {
+fn find_max<'a>(
+    happiness: &HashMap<(&'a str, &'a str), i64>,
+    people: &HashSet<&'a str>,
+    start: &'a str,
+    pivot: &'a str,
+    found: &mut HashSet<&'a str>,
+) -> i64 {
     if found.len() == people.len() {
         return happiness.get(&(pivot, start)).unwrap() + happiness.get(&(start, pivot)).unwrap();
     }
@@ -68,7 +77,9 @@ fn find_max<'a>(happiness: &HashMap<(&'a str, &'a str), i64>, people: &HashSet<&
     let mut max = -9999;
 
     for p in people.iter() {
-        if found.contains(p) { continue }
+        if found.contains(p) {
+            continue;
+        }
 
         let p2 = p.to_owned();
 
@@ -78,7 +89,9 @@ fn find_max<'a>(happiness: &HashMap<(&'a str, &'a str), i64>, people: &HashSet<&
 
         val += happiness.get(&(pivot, p2)).unwrap() + happiness.get(&(p2, pivot)).unwrap();
 
-        if val > max { max = val; }
+        if val > max {
+            max = val;
+        }
     }
 
     max

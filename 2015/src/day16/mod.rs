@@ -1,5 +1,5 @@
-use std::fs;
 use regex::Regex;
+use std::fs;
 
 pub fn main() {
     let aunts = fs::read_to_string("data/day16.txt").unwrap();
@@ -21,16 +21,16 @@ enum Comparator {
 
 fn find(aunts: &str, part2: bool) -> String {
     let tests = vec![
-        ("children",    3, Comparator::Equal      ),
-        ("cats",        7, Comparator::GreaterThan),
-        ("samoyeds",    2, Comparator::Equal      ),
-        ("pomeranians", 3, Comparator::LessThan   ),
-        ("akitas",      0, Comparator::Equal      ),
-        ("vizslas",     0, Comparator::Equal      ),
-        ("goldfish",    5, Comparator::LessThan   ),
-        ("trees",       3, Comparator::GreaterThan),
-        ("cars",        2, Comparator::Equal      ),
-        ("perfumes",    1, Comparator::Equal      )
+        ("children", 3, Comparator::Equal),
+        ("cats", 7, Comparator::GreaterThan),
+        ("samoyeds", 2, Comparator::Equal),
+        ("pomeranians", 3, Comparator::LessThan),
+        ("akitas", 0, Comparator::Equal),
+        ("vizslas", 0, Comparator::Equal),
+        ("goldfish", 5, Comparator::LessThan),
+        ("trees", 3, Comparator::GreaterThan),
+        ("cars", 2, Comparator::Equal),
+        ("perfumes", 1, Comparator::Equal),
     ];
     'outer: for aunt in aunts.lines() {
         let mut aunt = aunt.to_string();
@@ -50,11 +50,23 @@ fn find(aunts: &str, part2: bool) -> String {
                     };
 
                     match comparison {
-                        Comparator::Equal => if number != test.1 { continue 'outer },
-                        Comparator::GreaterThan => if number <= test.1 { continue 'outer },
-                        Comparator::LessThan => if number >= test.1 { continue 'outer },
+                        Comparator::Equal => {
+                            if number != test.1 {
+                                continue 'outer;
+                            }
+                        }
+                        Comparator::GreaterThan => {
+                            if number <= test.1 {
+                                continue 'outer;
+                            }
+                        }
+                        Comparator::LessThan => {
+                            if number >= test.1 {
+                                continue 'outer;
+                            }
+                        }
                     }
-                },
+                }
             }
         }
         return aunt.split(": ").next().unwrap().to_string();

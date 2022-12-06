@@ -1,6 +1,6 @@
-use std::fs;
 use regex::Regex;
 use serde_json::Value;
+use std::fs;
 
 pub fn main() {
     let input = fs::read_to_string("data/day12.txt").unwrap();
@@ -30,12 +30,10 @@ fn walk_tree(json: &Value) -> i64 {
         Value::Bool(_) => 0,
         Value::Number(n) => n.as_i64().unwrap(),
         Value::String(_) => 0,
-        Value::Array(a) => a.iter().fold(0,|t, j| t + walk_tree(j)),
-        Value::Object(o) => {
-            match o.values().any(|v| *v == Value::String("red".to_string())) {
-                true => 0,
-                false => o.values().fold(0, |t, j| t + walk_tree(j)),
-            }
-        }
+        Value::Array(a) => a.iter().fold(0, |t, j| t + walk_tree(j)),
+        Value::Object(o) => match o.values().any(|v| *v == Value::String("red".to_string())) {
+            true => 0,
+            false => o.values().fold(0, |t, j| t + walk_tree(j)),
+        },
     }
 }

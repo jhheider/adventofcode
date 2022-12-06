@@ -1,7 +1,7 @@
-use std::fs;
-use std::cmp::{min, max};
-use std::collections::{HashMap};
 use regex::Regex;
+use std::cmp::{max, min};
+use std::collections::HashMap;
+use std::fs;
 
 pub fn main() {
     let test = fs::read_to_string("data/day14test.txt").unwrap();
@@ -25,7 +25,10 @@ pub fn main() {
 }
 
 fn compute(input: &str, seconds: i32, part2: bool) -> i32 {
-    let parser = Regex::new("(.+) can fly ([0-9]+) km/s for ([0-9]+) seconds, but then must rest for ([0-9]+) seconds.").unwrap();
+    let parser = Regex::new(
+        "(.+) can fly ([0-9]+) km/s for ([0-9]+) seconds, but then must rest for ([0-9]+) seconds.",
+    )
+    .unwrap();
     let mut speeds = HashMap::new();
 
     for i in input.lines() {
