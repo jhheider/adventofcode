@@ -89,19 +89,19 @@ pub fn main() {
 
   let test1 = test.apply_all().get_tops().iter().join("");
   assert_eq!(test1, "CMZ");
-  println!("Day 5, test 1: {}", test1);
+  println!("Day 5: Test 1: {}", test1);
 
   let part1 = input.apply_all().get_tops().iter().join("");
   assert_eq!(part1, "WSFTMRHPP");
-  println!("Day 5, part 1: {}", part1);
+  println!("Day 5: Part 1: {}", part1);
 
   let test2 = test.apply_all_reversed().get_tops().iter().join("");
   assert_eq!(test2, "MCD");
-  println!("Day 5, test 2: {}", test2);
+  println!("Day 5: Test 2: {}", test2);
 
   let part2 = input.apply_all_reversed().get_tops().iter().join("");
   assert_eq!(part2, "GSLCMFBRP");
-  println!("Day 5, part 2: {}", part2);
+  println!("Day 5: Part 2: {}", part2);
 }
 
 fn parse(input: &str) -> Input {

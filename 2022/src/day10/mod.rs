@@ -98,7 +98,7 @@ pub fn main() {
   test1.run(&test);
   assert_eq!(test1.signal_strengths().iter().sum::<isize>(), 13140);
   println!(
-    "Day 10: test 1: {}",
+    "Day 10: Test 1: {}",
     test1.signal_strengths().iter().sum::<isize>()
   );
 
@@ -111,17 +111,17 @@ pub fn main() {
   part1.run(&input);
   assert_eq!(part1.signal_strengths().iter().sum::<isize>(), 17940);
   println!(
-    "Day 10: part 1: {}",
+    "Day 10: Part 1: {}",
     part1.signal_strengths().iter().sum::<isize>()
   );
 
   let mut test2 = Cpu::new();
   test2.run(&test);
-  println!("Day 10: test 2: {}", test2);
+  println!("Day 10: Test 2: {}", test2);
 
   let mut part2 = Cpu::new();
   part2.run(&input);
-  println!("Day 10: part 2: {}", part2);
+  println!("Day 10: Part 2: {}", part2);
 }
 
 const TEST: &str = r"addx 15

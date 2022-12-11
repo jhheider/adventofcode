@@ -42,17 +42,17 @@ pub fn main() {
 
   let test1 = part1(&test).0;
   assert_eq!(test1, 45);
-  println!("Day 17: test input: {test1}");
+  println!("Day 17: Test 1: {test1}");
   let p1 = part1(&input).0;
   assert_eq!(p1, 9730);
-  println!("Day 17: input: {p1}");
+  println!("Day 17: Part 1: {p1}");
 
   let test2 = part1(&test).1;
   assert_eq!(test2, 112);
-  println!("Day 17: test input: {test2}");
+  println!("Day 17: Test 2: {test2}");
   let p2 = part1(&input).1;
   assert_eq!(p2, 4110);
-  println!("Day 17: input: {p2}");
+  println!("Day 17: Part 2: {p2}");
 }
 
 fn sum(x: isize) -> isize {

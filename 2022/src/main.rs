@@ -55,8 +55,12 @@ fn main() {
     day25::main,
   ];
 
-  match env::args().collect::<Vec<String>>().get(1) {
-    Some(n) => days.get(n.parse::<usize>().unwrap() - 1).unwrap()(),
+  match env::args()
+    .collect::<Vec<String>>()
+    .get(1)
+    .and_then(|n| n.parse::<usize>().ok())
+  {
+    Some(n) => days.get(n - 1).unwrap()(),
     None => *days
       .iter()
       .map(|func| func())

@@ -11,19 +11,19 @@ const TESTS: [(&str, usize, usize); 5] = [
 ];
 
 pub fn main() {
-  for (input, answer1, answer2) in TESTS.iter() {
+  for (n, (input, answer1, answer2)) in TESTS.iter().enumerate() {
     let (part1, part2) = solve(input);
     assert_eq!(part1, *answer1);
     assert_eq!(part2, *answer2);
-    println!("Day 6, test, {} -> {}, {}", input, part1, part2);
+    println!("Day 6: Test {}, {} -> {}, {}", n + 1, input, part1, part2);
   }
 
   let input = &fs::read_to_string("data/day6.txt").unwrap();
   let (part1, part2) = solve(input);
   assert_eq!(part1, 1892);
-  println!("Day 6, part 1: {}", part1);
-  assert_eq!(part2, 0);
-  println!("Day 6, part 2: {}", part2);
+  println!("Day 6: Part 1: {}", part1);
+  assert_eq!(part2, 2313);
+  println!("Day 6: Part 2: {}", part2);
 }
 
 fn solve(input: &str) -> (usize, usize) {

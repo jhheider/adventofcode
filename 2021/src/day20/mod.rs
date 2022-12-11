@@ -141,22 +141,22 @@ pub fn main() {
   let mut test1 = parse(TEST);
   test1.1.run(&test1.0, 2);
   assert_eq!(test1.1.lit(), 35);
-  println!("Day 20, test 1: {}", test1.1.lit());
+  println!("Day 20: Test 1: {}", test1.1.lit());
 
   let mut input1 = parse(&fs::read_to_string("data/day20.txt").unwrap());
   input1.1.run(&input1.0, 2);
   assert_eq!(input1.1.lit(), 4873);
-  println!("Day 20, part 1: {}", input1.1.lit());
+  println!("Day 20: Part 1: {}", input1.1.lit());
 
   let mut test2 = parse(TEST);
   test2.1.run(&test2.0, 50);
   assert_eq!(test2.1.lit(), 3351);
-  println!("Day 20, test 2: {}", test2.1.lit());
+  println!("Day 20: Test 2: {}", test2.1.lit());
 
   let mut input2 = parse(&fs::read_to_string("data/day20.txt").unwrap());
   input2.1.run(&input2.0, 50);
-  assert_eq!(input2.1.lit(), 4873);
-  println!("Day 20, part 2: {}", input2.1.lit());
+  assert_eq!(input2.1.lit(), 16394);
+  println!("Day 20: Part 2: {}", input2.1.lit());
 }
 
 fn parse(input: &str) -> (Algorithm, Image) {

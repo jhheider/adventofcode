@@ -127,17 +127,17 @@ pub fn main() {
     let test = GameState::new(10, 250, 13, 8, false);
     let test1 = min_mana(test);
     assert_eq!(test1, 226);
-    println!("Day 22 Test 1: {}", test1);
+    println!("Day 22: Test 1: {}", test1);
 
     let input = GameState::new(50, 500, 58, 9, false);
     let part1 = min_mana(input);
     assert_eq!(part1, 1269);
-    println!("Day 22 Part 1: {}", part1);
+    println!("Day 22: Part 1: {}", part1);
 
     let input2 = GameState::new(50, 500, 58, 9, true);
     let part2 = min_mana(input2);
     assert_eq!(part2, 1309);
-    println!("Day 22 Part 2: {}", part2);
+    println!("Day 22: Part 2: {}", part2);
 }
 
 fn min_mana(start: GameState) -> usize {

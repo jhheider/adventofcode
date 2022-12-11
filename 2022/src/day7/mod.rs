@@ -153,22 +153,22 @@ pub fn main() {
   let test = parse(TEST);
   let test1 = test.sum_of_nodes_under_limit(100000);
   assert_eq!(test1, 95437);
-  println!("Day 7, test 1: {}", test1);
+  println!("Day 7: Test 1: {}", test1);
 
   let input = parse(&fs::read_to_string("data/day7.txt").unwrap());
   let part1 = input.sum_of_nodes_under_limit(100000);
   assert_eq!(part1, 1908462);
-  println!("Day 7, part 1: {}", part1);
+  println!("Day 7: Part 1: {}", part1);
 
   let limit = test.node_size("/") - 40000000;
   let test2 = test.find_smallest_directory_over_limit(limit);
   assert_eq!(test2, 24933642);
-  println!("Day 7, test 2: {}", test2);
+  println!("Day 7: Test 2: {}", test2);
 
   let limit = input.node_size("/") - 40000000;
   let part2 = input.find_smallest_directory_over_limit(limit);
   assert_eq!(part2, 3979145);
-  println!("Day 7, part 2: {}", part2);
+  println!("Day 7: Part 2: {}", part2);
 }
 
 fn parse(input: &str) -> FileSystem {

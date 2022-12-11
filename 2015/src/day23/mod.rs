@@ -76,19 +76,19 @@ pub fn main() {
     test.run();
     let test1 = test.registers.get(&'a').unwrap();
     assert_eq!(*test1, 2);
-    println!("Day 23, test 1: {}", test1);
+    println!("Day 23: Test 1: {}", test1);
 
     let mut input = Computer::new(parse(&fs::read_to_string("data/day23.txt").unwrap()), 0);
     input.run();
     let part1 = input.registers.get(&'b').unwrap();
     assert_eq!(part1, &184);
-    println!("Day 23, part 1: {}", part1);
+    println!("Day 23: Part 1: {}", part1);
 
     let mut input2 = Computer::new(parse(&fs::read_to_string("data/day23.txt").unwrap()), 1);
     input2.run();
     let part2 = input2.registers.get(&'b').unwrap();
     assert_eq!(part2, &231);
-    println!("Day 23, part 2: {}", part2);
+    println!("Day 23: Part 2: {}", part2);
 }
 
 fn parse(input: &str) -> Vec<Instruction> {
