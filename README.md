@@ -35,7 +35,7 @@ Runs solutions for all years.
 YEARS="$(ls -d 20??)"
 
 for YEAR in $YEARS; do
-  echo "\nRunning $YEAR\n"
+  echo -e "\nRunning $YEAR\n"
   tea . "$YEAR"
 done
 ```
