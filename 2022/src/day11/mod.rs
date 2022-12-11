@@ -137,22 +137,22 @@ pub fn main() {
   let mut test1 = Barrel::new(TEST);
   test1.run(20, false);
   assert_eq!(test1.monkey_business(), 10605);
-  println!("Day 11, test 1: {}", test1.monkey_business());
+  println!("Day 11, Test 1: {}", test1.monkey_business());
 
   let mut part1 = Barrel::new(include_str!("../../data/day11.txt"));
   part1.run(20, false);
   assert_eq!(part1.monkey_business(), 58322);
-  println!("Day 11, part 1: {}", part1.monkey_business());
+  println!("Day 11, Part 1: {}", part1.monkey_business());
 
   let mut test2 = Barrel::new(TEST);
   test2.run(10000, true);
   assert_eq!(test2.monkey_business(), 2_713_310_158);
-  println!("Day 11, test 2: {}", test2.monkey_business());
+  println!("Day 11, Test 2: {}", test2.monkey_business());
 
   let mut part2 = Barrel::new(include_str!("../../data/day11.txt"));
   part2.run(10000, true);
   assert_eq!(part2.monkey_business(), 13937702909);
-  println!("Day 11, part 2: {}", part2.monkey_business());
+  println!("Day 11, Part 2: {}", part2.monkey_business());
 }
 
 const TEST: &str = r"Monkey 0:

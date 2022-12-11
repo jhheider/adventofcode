@@ -41,8 +41,8 @@ pub fn main() {
   println!("Day 4: Test 2: {test2} pairs overlap");
 
   let part2 = input.iter().filter(|t| t.overlap()).count();
-  assert_eq!(part2, 491);
-  println!("Day 4: Test 2: {part2} pairs overlap");
+  assert_eq!(part2, 801);
+  println!("Day 4: Part 2: {part2} pairs overlap");
 }
 
 fn parse(input: &str) -> Vec<Team> {

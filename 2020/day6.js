@@ -1,13 +1,13 @@
 const _ = require('lodash')
 const data = require('./inputs/day6.json')
 
-const normalize_data = data => {
+const normalizeData = (data) => {
   const answers = []
-  let group = ""
-  data.forEach(row => {
+  let group = ''
+  data.forEach((row) => {
     if (row.length === 0) {
       answers.push(group)
-      group = ""
+      group = ''
       return
     }
     group += row
@@ -16,15 +16,15 @@ const normalize_data = data => {
   return answers
 }
 
-const answers = normalize_data(data)
-const counts = answers.map(a => _.uniq(a.split('')).length)
+const answers = normalizeData(data)
+const counts = answers.map((a) => _.uniq(a.split('')).length)
 
-console.log('Part 1:', _.sum(counts))
+console.log('Day 6: Part 1:', _.sum(counts))
 
-const normalize_data2 = data => {
+const normalizeData2 = (data) => {
   const answers = []
   let group = []
-  data.forEach(row => {
+  data.forEach((row) => {
     if (row.length === 0) {
       answers.push(group)
       group = []
@@ -36,8 +36,6 @@ const normalize_data2 = data => {
   return answers
 }
 
-const answers2 = normalize_data2(data)
-const counts2 = answers2.map(g => _.intersection(...g).length)
-console.log('Part 2:', _.sum(counts2))
-
-console.log(answers2[0], _.intersection(...answers2[0]))
+const answers2 = normalizeData2(data)
+const counts2 = answers2.map((g) => _.intersection(...g).length)
+console.log('Day 6: Part 2:', _.sum(counts2))

@@ -177,18 +177,18 @@ pub fn main() {
   let test = Forest::new(TEST);
   let test1 = test.count_visible();
   assert_eq!(test1, 21);
-  println!("Day 1, test 1: {}", test1);
+  println!("Day 8: Test 1: {}", test1);
 
   let input = Forest::new(&fs::read_to_string("data/day8.txt").unwrap());
   let part1 = input.count_visible();
   assert_eq!(part1, 1805);
-  println!("Day 1, part 1: {}", part1);
+  println!("Day 8: Part 1: {}", part1);
 
   let test2 = test.best_score();
   assert_eq!(test2, 8);
-  println!("Day 1, test 2: {}", test2);
+  println!("Day 8: Test 2: {}", test2);
 
   let part2 = input.best_score();
-  assert_eq!(part2, 8);
-  println!("Day 1, part 2: {}", part2);
+  assert_eq!(part2, 444528);
+  println!("Day 8: Part 2: {}", part2);
 }

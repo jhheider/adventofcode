@@ -18,7 +18,7 @@ Dublin to Belfast = 141";
     let part1 = solve(&input);
     assert_eq!(part1, (117, 909));
 
-    println!("Day 9: test: {} - {}", test.0, test.1);
+    println!("Day 9: Test 1: {} - {}", test.0, test.1);
     println!("Day 9: Part 1: {} - {}", part1.0, part1.1);
 }
 

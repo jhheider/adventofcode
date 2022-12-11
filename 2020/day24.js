@@ -1,9 +1,9 @@
 const { test, input } = require('./inputs/day24.json')
 
-const reduce = directions => {
+const reduce = (directions) => {
   // https://www.redblobgames.com/grids/hexagons/#coordinates
   // This was very helpful in visualizing hexagonal representation
-  let pos = [0, 0, 0]
+  const pos = [0, 0, 0]
 
   let charPos = 0
   while (charPos < directions.length) {
@@ -38,12 +38,12 @@ const reduce = directions => {
             break
         }
         break
-      }
     }
-    return pos.join(':')
   }
+  return pos.join(':')
+}
 
-const walk = input => {
+const walk = (input) => {
   const flipped = new Set([reduce(input[0])])
   for (let x = 1; x < input.length; x++) {
     const pos = reduce(input[x])
@@ -53,15 +53,15 @@ const walk = input => {
   return flipped
 }
 
-console.log('Test 1:', walk(test).size)
-console.log('Part 1:', walk(input).size)
+console.log('Day 24: Test 1:', walk(test).size)
+console.log('Day 24: Part 1:', walk(input).size)
 
-const permute = flipped => {
+const permute = (flipped) => {
   let begin = new Set(flipped)
   let end = new Set()
   for (let steps = 0; steps < 100; steps++) {
-    begin.forEach(coords => {
-      let [cX, cY, cZ] = coords.split(':').map(i => +i)
+    begin.forEach((coords) => {
+      const [cX, cY, cZ] = coords.split(':').map((i) => +i)
       for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
           for (let z = -1; z <= 1; z++) {
@@ -74,8 +74,7 @@ const permute = flipped => {
               begin.has(`${cX + x + 0}:${cY + y + 1}:${cZ + z - 1}`) +
               begin.has(`${cX + x + 1}:${cY + y - 1}:${cZ + z + 0}`) +
               begin.has(`${cX + x + 1}:${cY + y + 0}:${cZ + z - 1}`)
-            if (neighbors === 2 || (neighbors === 1 && begin.has(me)))
-              end.add(me)
+            if (neighbors === 2 || (neighbors === 1 && begin.has(me))) { end.add(me) }
           }
         }
       }
@@ -86,5 +85,5 @@ const permute = flipped => {
   return begin
 }
 
-console.log('Test 2:', permute(walk(test)).size)
-console.log('Part 2:', permute(walk(input)).size)
+console.log('Day 24: Test 2:', permute(walk(test)).size)
+console.log('Day 24: Part 2:', permute(walk(input)).size)

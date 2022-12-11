@@ -1,0 +1,27 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+name: test
+
+jobs:
+  test:
+    name: test
+    env:
+      RUSTFLAGS:
+        -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort -D warnings
+      RUSTDOCFLAGS: -Cpanic=abort
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        year:
+          - 2015
+          - 2020
+          - 2021
+          - 2022
+    steps:
+      - uses: actions/checkout@v3
+      - uses: teaxyz/setup@v0
+      - run: tea . ${{ matrix.year }}

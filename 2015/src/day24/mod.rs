@@ -43,7 +43,7 @@ pub fn main() {
     let test = Packages::new(vec![1, 2, 3, 4, 5, 7, 8, 9, 10, 11]);
     let test1 = test.smallest_group(3);
     assert_eq!(test1, 99);
-    println!("Day 24, test 1: {:?}", test1);
+    println!("Day 24: Test 1: {:?}", test1);
 
     let input = Packages::new(vec![
         1, 3, 5, 11, 13, 17, 19, 23, 29, 31, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
@@ -51,13 +51,13 @@ pub fn main() {
     ]);
     let part1 = input.smallest_group(3);
     assert_eq!(part1, 11266889531);
-    println!("Day 24, part 1: {:?}", part1);
+    println!("Day 24: Part 1: {:?}", part1);
 
     let test2 = test.smallest_group(4);
     assert_eq!(test2, 44);
-    println!("Day 24, test 2: {:?}", test2);
+    println!("Day 24: Test 2: {:?}", test2);
 
     let part2 = input.smallest_group(4);
     assert_eq!(part2, 77387711);
-    println!("Day 24, part 2: {:?}", part2);
+    println!("Day 24: Part 2: {:?}", part2);
 }

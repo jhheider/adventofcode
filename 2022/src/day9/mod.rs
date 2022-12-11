@@ -92,22 +92,22 @@ pub fn main() {
   let mut test1 = State::new(2);
   test1.run(TEST);
   assert_eq!(test1.visited.len(), 13);
-  println!("Day 9, test 1: {}", test1.visited.len());
+  println!("Day 9: Test 1: {}", test1.visited.len());
 
   let input = &fs::read_to_string("data/day9.txt").unwrap();
 
   let mut part1 = State::new(2);
   part1.run(input);
   assert_eq!(part1.visited.len(), 6030);
-  println!("Day 9, part 1: {}", part1.visited.len());
+  println!("Day 9: Part 1: {}", part1.visited.len());
 
   let mut test2 = State::new(10);
   test2.run(TEST2);
   assert_eq!(test2.visited.len(), 36);
-  println!("Day 9, test 2: {}", test2.visited.len());
+  println!("Day 9: Test 2: {}", test2.visited.len());
 
   let mut part2 = State::new(10);
   part2.run(input);
   assert_eq!(part2.visited.len(), 2545);
-  println!("Day 9, part 2: {}", part2.visited.len());
+  println!("Day 9: Part 2: {}", part2.visited.len());
 }

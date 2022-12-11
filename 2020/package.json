@@ -1,0 +1,30 @@
+{
+  "name": "aoc2020",
+  "version": "1.0.0",
+  "description": "Solutions to Advent of Code: 2020",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhheider/adventofcode.git"
+  },
+  "author": "Jacob Heider <jhheider@gmail.com>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/jhheider/adventofcode/issues"
+  },
+  "homepage": "https://github.com/jhheider/adventofcode#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}

@@ -1,13 +1,13 @@
 const { tests, inputs } = require('./inputs/day18.json')
 
-const run_tape = input => {
-  const regex = /\([0-9 \+\*]{3,}\)/
+const runTape = (input) => {
+  const regex = /\([0-9 +*]{3,}\)/
   let x = input.match(regex)
   while (x) {
-    input = input.replace(regex, run_tape(x[0].slice(1, -1)))
+    input = input.replace(regex, runTape(x[0].slice(1, -1)))
     x = input.match(regex)
   }
-  let tokens = input.split(' ')
+  const tokens = input.split(' ')
   let value = +tokens[0]
   for (let pos = 1; pos < tokens.length - 1; pos += 2) {
     switch (tokens[pos]) {
@@ -22,24 +22,30 @@ const run_tape = input => {
   return value
 }
 
-tests.forEach((t, i) => console.log(`Test ${i + 1}:`, run_tape(t)))
-console.log('Part 1:', inputs.map(run_tape).reduce((a, b) => a + b))
+tests.forEach((t, i) => console.log(`Day 18: Test ${i + 1}:`, runTape(t)))
+console.log(
+  'Day 18: Part 1:',
+  inputs.map(runTape).reduce((a, b) => a + b)
+)
 
-const run_tape2 = input => {
-  const parens_regex = /\([0-9 \+\*]{3,}\)/
-  let parens = input.match(parens_regex)
+const runTape2 = (input) => {
+  const parensRegex = /\([0-9 +*]{3,}\)/
+  let parens = input.match(parensRegex)
   while (parens) {
-    input = input.replace(parens_regex, run_tape2(parens[0].slice(1, -1)))
-    parens = input.match(parens_regex)
+    input = input.replace(parensRegex, runTape2(parens[0].slice(1, -1)))
+    parens = input.match(parensRegex)
   }
-  const plus_regex = /([0-9]+) \+ ([0-9]+)/
-  let plus = input.match(plus_regex)
+  const plusRegex = /([0-9]+) \+ ([0-9]+)/
+  let plus = input.match(plusRegex)
   while (plus) {
-    input = input.replace(plus_regex, +plus[1] + +plus[2])
-    plus = input.match(plus_regex)
+    input = input.replace(plusRegex, +plus[1] + +plus[2])
+    plus = input.match(plusRegex)
   }
-  return input.split(' * ').reduce((t, i) => t *= +i, 1)
+  return input.split(' * ').reduce((t, i) => (t *= +i), 1)
 }
 
-tests.forEach((t, i) => console.log(`Test ${i + 7}:`, run_tape2(t)))
-console.log('Part 2:', inputs.map(run_tape2).reduce((a, b) => a + b))
+tests.forEach((t, i) => console.log(`Day 18: Test ${i + 7}:`, runTape2(t)))
+console.log(
+  'Day 18: Part 2:',
+  inputs.map(runTape2).reduce((a, b) => a + b)
+)
