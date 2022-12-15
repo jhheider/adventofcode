@@ -4,7 +4,7 @@ Might as well preserve this for posterity (you never know).
 
 ## Getting Started
 
-Run `tea run [YEAR] [day]` to run a specific day/year.
+Run `tea . [YEAR] [day]` to run a specific day/year.
 
 ```sh
 YEAR="${1:-2022}"
