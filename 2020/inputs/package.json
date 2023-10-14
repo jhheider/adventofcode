@@ -9,6 +9,6 @@
   "author": "Jacob Heider <jhheider@gmail.com>",
   "license": "Unlicense",
   "dependencies": {
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.21"
   }
 }
