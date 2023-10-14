@@ -1,0 +1,5 @@
+dependencies:
+  rust-lang.org: ^1.65
+  rust-lang.org/cargo: "*"
+  just.systems: "*"
+  git-scm.org: ^2
