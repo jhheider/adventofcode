@@ -81,10 +81,9 @@ pub fn main() {
 }
 
 fn parse(input: &str) -> usize {
-  let buffer = input
-    .chars()
-    .map(|c| format!("{:04b}", c.to_digit(16).unwrap()))
-    .collect::<String>();
+  let buffer = input.chars().fold("".to_string(), |s, c| {
+    s + &format!("{:04b}", c.to_digit(16).unwrap())
+  });
   let root = debuffer_packets(buffer);
   root.0.versions()
 }
@@ -164,12 +163,9 @@ fn str_to_value(s: &str) -> usize {
 }
 
 fn compute(input: &str) -> usize {
-  let root = debuffer_packets(
-    input
-      .chars()
-      .map(|c| format!("{:04b}", c.to_digit(16).unwrap()))
-      .collect::<String>(),
-  )
+  let root = debuffer_packets(input.chars().fold("".to_string(), |s, c| {
+    s + &format!("{:04b}", c.to_digit(16).unwrap())
+  }))
   .0;
 
   root.compute()

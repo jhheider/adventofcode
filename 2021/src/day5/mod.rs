@@ -4,11 +4,11 @@ use std::{
   cmp::{max, min},
   collections::HashMap,
   fs,
+  hash::{Hash, Hasher},
 };
 
 // This is safe to ignore at this time.
-#[allow(clippy::derive_hash_xor_eq)]
-#[derive(Debug, Eq, Hash, Clone, Copy)]
+#[derive(Debug, Eq, Clone, Copy)]
 struct Point {
   x: i32,
   y: i32,
@@ -17,6 +17,13 @@ struct Point {
 impl PartialEq for Point {
   fn eq(&self, rhs: &Point) -> bool {
     (self.x == rhs.x) && (self.y == rhs.y)
+  }
+}
+
+impl Hash for Point {
+  fn hash<H: Hasher>(&self, state: &mut H) {
+    self.x.hash(state);
+    self.y.hash(state);
   }
 }
 

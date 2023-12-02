@@ -16,27 +16,27 @@ jobs:
   check-rust:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         year:
         - 2015
+        - 2016
         - 2021
         - 2022
+        - 2023
     steps:
       - uses: actions/checkout@v3
-      - uses: teaxyz/setup@v0
+      - uses: pkgxdev/setup@v1
       - name: check
-        run:
-          cargo check
+        run: pkgx +rustc^1.65 +cargo cargo check
         working-directory: ${{ matrix.year }}
         env:
           RUSTFLAGS: "-D warnings"
       - name: fmt
-        run:
-          cargo fmt --all -- --check
+        run: pkgx +rustc^1.65 +cargo cargo fmt --all -- --check
         working-directory: ${{ matrix.year }}
       - name: clippy
-        run:
-          cargo clippy --all-features
+        run: pkgx +rustc^1.65 +cargo cargo clippy --all-features
         working-directory: ${{ matrix.year }}
         env:
           RUSTFLAGS: "-D warnings"
@@ -44,9 +44,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: teaxyz/setup@v0
-      - run: npm ci
+      - uses: pkgxdev/setup@v1
+      - run: pkgx npm ci
         working-directory: "2020"
       - name: eslint
-        run: npm run check
+        run: pkgx npm run check
         working-directory: "2020"

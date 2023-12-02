@@ -30,9 +30,7 @@ impl Algorithm {
   fn new(algorithm: Vec<&str>) -> Self {
     let algorithm = algorithm
       .iter()
-      .map(|line| line.chars().map(|c| c == '#').collect::<Vec<bool>>())
-      .into_iter()
-      .flatten()
+      .flat_map(|line| line.chars().map(|c| c == '#').collect::<Vec<bool>>())
       .collect();
     Self { algorithm }
   }

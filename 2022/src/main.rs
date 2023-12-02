@@ -63,7 +63,10 @@ fn main() {
     Some(n) => days.get(n - 1).unwrap()(),
     None => *days
       .iter()
-      .map(|func| func())
+      .enumerate()
+      // day16 takes too long to run constantly
+      .filter(|(d, _)| *d != 15)
+      .map(|(_, func)| func())
       .collect::<Vec<_>>()
       .last()
       .unwrap(),

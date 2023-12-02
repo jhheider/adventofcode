@@ -16,8 +16,8 @@ struct Bag {
 
 impl Bag {
   fn in_both(&self) -> char {
-    let first = HashSet::<char>::from_iter(self.first.clone().into_iter());
-    let second = HashSet::from_iter(self.second.clone().into_iter());
+    let first = HashSet::<char>::from_iter(self.first.clone());
+    let second = HashSet::from_iter(self.second.clone());
     **first.intersection(&second).collect_vec().first().unwrap()
   }
 
@@ -28,9 +28,9 @@ impl Bag {
   }
 
   fn in_three(&self, second_bag: &Bag, third_bag: &Bag) -> char {
-    let first = HashSet::<char>::from_iter(self.all().into_iter());
-    let second = HashSet::<char>::from_iter(second_bag.all().into_iter());
-    let third = HashSet::<char>::from_iter(third_bag.all().into_iter());
+    let first = HashSet::<char>::from_iter(self.all());
+    let second = HashSet::<char>::from_iter(second_bag.all());
+    let third = HashSet::<char>::from_iter(third_bag.all());
     **first
       .intersection(&second)
       .copied()

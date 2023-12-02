@@ -4,7 +4,7 @@ Might as well preserve this for posterity (you never know).
 
 ## Tasks
 
-### Run year
+### Run-year
 
 Run `xc [YEAR] [day]` to run a specific day/year.
 
@@ -29,7 +29,7 @@ case "$YEAR" in
 esac
 ```
 
-### Run all
+### Run-all
 
 Runs solutions for all years.
 
@@ -39,7 +39,7 @@ YEARS="$(ls -d 20??)"
 
 for YEAR in $YEARS; do
   echo -e "\nRunning $YEAR\n"
-  tea . "$YEAR"
+  xc run-year "$YEAR"
 done
 ```
 

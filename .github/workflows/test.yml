@@ -15,13 +15,16 @@ jobs:
       RUSTDOCFLAGS: -Cpanic=abort
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         year:
           - 2015
+          - 2016
           - 2020
           - 2021
           - 2022
+          - 2023
     steps:
       - uses: actions/checkout@v3
-      - uses: teaxyz/setup@v0
-      - run: tea . ${{ matrix.year }}
+      - uses: pkgxdev/setup@v1
+      - run: pkgx +rustc^1.65 +cargo +xc xc run-year ${{ matrix.year }}

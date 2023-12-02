@@ -1,5 +1,6 @@
 {
   "rust-analyzer.checkOnSave.command": "clippy",
   "editor.formatOnSave": true,
-  "prettier.enable": false
+  "prettier.enable": false,
+  "rust-analyzer.check.command": "clippy"
 }
