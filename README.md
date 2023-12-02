@@ -2,9 +2,11 @@
 
 Might as well preserve this for posterity (you never know).
 
-## Getting Started
+## Tasks
 
-Run `tea . [YEAR] [day]` to run a specific day/year.
+### Run year
+
+Run `xc [YEAR] [day]` to run a specific day/year.
 
 ```sh
 YEAR="${1:-2022}"
@@ -27,11 +29,12 @@ case "$YEAR" in
 esac
 ```
 
-## Run all
+### Run all
 
 Runs solutions for all years.
 
 ```sh
+set -x
 YEARS="$(ls -d 20??)"
 
 for YEAR in $YEARS; do
