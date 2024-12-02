@@ -1,16 +1,12 @@
-const TEST: &str = "7 6 4 2 1
-1 2 7 8 9
-9 7 6 2 1
-1 3 2 4 5
-8 6 4 4 1
-1 3 6 7 9";
+use crate::data::Data;
 
 pub fn main() {
-  let test = parse(TEST);
+  let data = Data::get(2);
+  let test = parse(&data.test);
   assert_eq!(pt1(&test), 2);
   println!("Day 2, Test 1: {}", pt1(&test));
 
-  let input = parse(include_str!("../../data/day2.txt"));
+  let input = parse(&data.input);
   println!("Day 2, Part 1: {}", pt1(&input));
 
   assert_eq!(pt2(&test), 4);

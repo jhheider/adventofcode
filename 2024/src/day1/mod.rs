@@ -1,16 +1,12 @@
-static TEST: &str = "3   4
-4   3
-2   5
-1   3
-3   9
-3   3";
+use crate::data::Data;
 
 pub fn main() {
-  let test: (Vec<i32>, Vec<i32>) = parse(TEST);
+  let data = Data::get(1);
+  let test: (Vec<i32>, Vec<i32>) = parse(&data.test);
   assert_eq!(pt1(&test), 11);
   println!("Dat 1, Test 1: {}", pt1(&test));
 
-  let input = parse(include_str!("../../data/day1.txt"));
+  let input = parse(&data.input);
   println!("Day 1, Part 1: {}", pt1(&input));
 
   assert_eq!(pt2(&test), 31);
