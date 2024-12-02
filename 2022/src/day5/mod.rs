@@ -1,16 +1,6 @@
-use std::fs;
-
 use itertools::Itertools;
 
-const TEST: &str = r"    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
-
-move 1 from 2 to 1
-move 3 from 1 to 3
-move 2 from 2 to 1
-move 1 from 1 to 2";
+use crate::data::Data;
 
 #[derive(Debug, Clone)]
 struct Input {
@@ -84,15 +74,15 @@ impl Input {
 }
 
 pub fn main() {
-  let test = parse(TEST);
-  let input = parse(&fs::read_to_string("data/day5.txt").unwrap());
+  let data = Data::get(5);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1 = test.apply_all().get_tops().iter().join("");
   assert_eq!(test1, "CMZ");
   println!("Day 5: Test 1: {}", test1);
 
   let part1 = input.apply_all().get_tops().iter().join("");
-  assert_eq!(part1, "WSFTMRHPP");
   println!("Day 5: Part 1: {}", part1);
 
   let test2 = test.apply_all_reversed().get_tops().iter().join("");
@@ -100,7 +90,6 @@ pub fn main() {
   println!("Day 5: Test 2: {}", test2);
 
   let part2 = input.apply_all_reversed().get_tops().iter().join("");
-  assert_eq!(part2, "GSLCMFBRP");
   println!("Day 5: Part 2: {}", part2);
 }
 

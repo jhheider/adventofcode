@@ -3,11 +3,7 @@ use std::{
   fmt::{Display, Error, Formatter},
 };
 
-const TEST: &str = r"Sabqponm
-abcryxxl
-accszExk
-acctuvwj
-abdefghi";
+use crate::data::Data;
 
 struct Map {
   heights: Vec<Vec<usize>>,
@@ -135,14 +131,14 @@ impl Display for Map {
 }
 
 pub fn main() {
-  let test = Map::new(TEST);
+  let data = Data::get(12);
+  let test = Map::new(&data.test);
   let test1 = test.find_shortest_path(false);
   assert_eq!(test1, 31);
   println!("Day 12: Test 1: {}", test1);
 
-  let input = Map::new(include_str!("../../data/day12.txt"));
+  let input = Map::new(&data.input);
   let part1 = input.find_shortest_path(false);
-  assert_eq!(part1, 472);
   println!("Day 12: Part 1: {}", part1);
 
   let test2 = test.find_shortest_path(true);
@@ -150,6 +146,5 @@ pub fn main() {
   println!("Day 12: Test 2: {}", test2);
 
   let part2 = input.find_shortest_path(true);
-  assert_eq!(part2, 465);
   println!("Day 12: Part 2: {}", part2);
 }

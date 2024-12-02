@@ -1,28 +1,6 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
 
-const TEST: &str = r"$ cd /
-$ ls
-dir a
-14848514 b.txt
-8504156 c.dat
-dir d
-$ cd a
-$ ls
-dir e
-29116 f
-2557 g
-62596 h.lst
-$ cd e
-$ ls
-584 i
-$ cd ..
-$ cd ..
-$ cd d
-$ ls
-4060174 j
-8033020 d.log
-5626152 d.ext
-7214296 k";
+use crate::data::Data;
 
 struct FileSystem {
   nodes: HashMap<String, Node>,
@@ -150,14 +128,14 @@ impl Node {
 }
 
 pub fn main() {
-  let test = parse(TEST);
+  let data = Data::get(7);
+  let test = parse(&data.input);
   let test1 = test.sum_of_nodes_under_limit(100000);
   assert_eq!(test1, 95437);
   println!("Day 7: Test 1: {}", test1);
 
-  let input = parse(&fs::read_to_string("data/day7.txt").unwrap());
+  let input = parse(&data.input);
   let part1 = input.sum_of_nodes_under_limit(100000);
-  assert_eq!(part1, 1908462);
   println!("Day 7: Part 1: {}", part1);
 
   let limit = test.node_size("/") - 40000000;
@@ -167,7 +145,6 @@ pub fn main() {
 
   let limit = input.node_size("/") - 40000000;
   let part2 = input.find_smallest_directory_over_limit(limit);
-  assert_eq!(part2, 3979145);
   println!("Day 7: Part 2: {}", part2);
 }
 

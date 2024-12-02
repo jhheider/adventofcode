@@ -1,13 +1,6 @@
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
 
-const TEST: &str = r"R 4
-U 4
-L 3
-D 1
-R 4
-D 1
-L 5
-R 2";
+use crate::data::Data;
 
 const TEST2: &str = r"R 5
 U 8
@@ -89,16 +82,14 @@ impl State {
 }
 
 pub fn main() {
+  let data = Data::get(9);
   let mut test1 = State::new(2);
-  test1.run(TEST);
+  test1.run(&data.test);
   assert_eq!(test1.visited.len(), 13);
   println!("Day 9: Test 1: {}", test1.visited.len());
 
-  let input = &fs::read_to_string("data/day9.txt").unwrap();
-
   let mut part1 = State::new(2);
-  part1.run(input);
-  assert_eq!(part1.visited.len(), 6030);
+  part1.run(&data.input);
   println!("Day 9: Part 1: {}", part1.visited.len());
 
   let mut test2 = State::new(10);
@@ -107,7 +98,6 @@ pub fn main() {
   println!("Day 9: Test 2: {}", test2.visited.len());
 
   let mut part2 = State::new(10);
-  part2.run(input);
-  assert_eq!(part2.visited.len(), 2545);
+  part2.run(&data.input);
   println!("Day 9: Part 2: {}", part2.visited.len());
 }

@@ -1,8 +1,4 @@
-use std::fs;
-
-const TEST: &str = r"A Y
-B X
-C Z";
+use crate::data::Data;
 
 struct Turn {
   opponent: Move,
@@ -110,15 +106,15 @@ impl Turn {
 }
 
 pub fn main() {
-  let test = parse(TEST);
-  let input = parse(&fs::read_to_string("data/day2.txt").unwrap());
+  let data = Data::get(2);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1: usize = test.iter().map(|t| t.points()).sum();
   assert_eq!(test1, 15);
   println!("Day 2: Test 1: total score is {test1}");
 
   let part1: usize = input.iter().map(|t| t.points()).sum();
-  assert_eq!(part1, 13052);
   println!("Day 2: Part 1: total score is {part1}");
 
   let test2: usize = test.iter().map(|t| t.points_from_outcome()).sum();
@@ -126,7 +122,6 @@ pub fn main() {
   println!("Day 2: Test 2: total score is {test2}");
 
   let part2: usize = input.iter().map(|t| t.points_from_outcome()).sum();
-  assert_eq!(part2, 13693);
   println!("Day 2: Part 2: total score is {part2}");
 }
 

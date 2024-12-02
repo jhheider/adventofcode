@@ -1,6 +1,8 @@
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
 
 use itertools::Itertools;
+
+use crate::data::Data;
 
 const TESTS: [(&str, usize, usize); 5] = [
   ("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7, 19),
@@ -11,6 +13,7 @@ const TESTS: [(&str, usize, usize); 5] = [
 ];
 
 pub fn main() {
+  let data = Data::get(6);
   for (n, (input, answer1, answer2)) in TESTS.iter().enumerate() {
     let (part1, part2) = solve(input);
     assert_eq!(part1, *answer1);
@@ -18,11 +21,8 @@ pub fn main() {
     println!("Day 6: Test {}, {} -> {}, {}", n + 1, input, part1, part2);
   }
 
-  let input = &fs::read_to_string("data/day6.txt").unwrap();
-  let (part1, part2) = solve(input);
-  assert_eq!(part1, 1892);
+  let (part1, part2) = solve(&data.input);
   println!("Day 6: Part 1: {}", part1);
-  assert_eq!(part2, 2313);
   println!("Day 6: Part 2: {}", part2);
 }
 

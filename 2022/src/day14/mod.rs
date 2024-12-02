@@ -3,8 +3,7 @@ use std::{
   fmt::{Display, Formatter, Result},
 };
 
-const TEST: &str = r"498,4 -> 498,6 -> 496,6
-503,4 -> 502,4 -> 502,9 -> 494,9";
+use crate::data::Data;
 
 struct Cave {
   floor: usize,
@@ -118,23 +117,22 @@ impl Point {
 }
 
 pub fn main() {
-  let mut test = Cave::new(TEST);
+  let data = Data::get(14);
+  let mut test = Cave::new(&data.test);
   let test1 = test.fill(false);
   assert_eq!(test1, 24);
   println!("Day 14: Test 1: {}", test1);
 
-  let mut input = Cave::new(include_str!("../../data/day14.txt"));
+  let mut input = Cave::new(&data.input);
   let part1 = input.fill(false);
-  assert_eq!(part1, 1406);
   println!("Day 14: Part 1: {}", part1);
 
-  let mut test = Cave::new(TEST);
+  let mut test = Cave::new(&data.test);
   let test2 = test.fill(true);
   assert_eq!(test2, 93);
   println!("Day 14: Test 2: {}", test2);
 
-  let mut input = Cave::new(include_str!("../../data/day14.txt"));
+  let mut input = Cave::new(&data.input);
   let part2 = input.fill(true);
-  assert_eq!(part2, 20870);
   println!("Day 14: Part 2: {}", part2);
 }

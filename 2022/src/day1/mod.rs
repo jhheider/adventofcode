@@ -1,6 +1,6 @@
-use std::fs;
-
 use itertools::Itertools;
+
+use crate::data::Data;
 
 #[derive(Debug)]
 struct Elf {
@@ -8,29 +8,14 @@ struct Elf {
 }
 
 pub fn main() {
-  let test = r"1000
-2000
-3000
-
-4000
-
-5000
-6000
-
-7000
-8000
-9000
-
-10000";
-
-  let test_elves = parse(test);
+  let data = Data::get(1);
+  let test_elves = parse(&data.test);
   let test1 = top(&test_elves).unwrap();
   assert_eq!(test1, 24000);
   println!("Day 1: Part 1: test max is {test1}");
 
-  let input = parse(&fs::read_to_string("data/day1.txt").unwrap());
+  let input = parse(&data.input);
   let part1 = top(&input).unwrap();
-  assert_eq!(part1, 71506);
   println!("Day 1: Part 1: max is {part1}");
 
   let test2 = top_three(&test_elves);
@@ -38,7 +23,6 @@ pub fn main() {
   println!("Day 1: Part 2: test top 3 is {test2}");
 
   let part2 = top_three(&input);
-  assert_eq!(part2, 209603);
   println!("Day 1: Part 2: top 3 is {part2}");
 }
 

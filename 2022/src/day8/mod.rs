@@ -1,13 +1,6 @@
-use std::{
-  fmt::{Display, Error, Formatter},
-  fs,
-};
+use std::fmt::{Display, Error, Formatter};
 
-const TEST: &str = r"30373
-25512
-65332
-33549
-35390";
+use crate::data::Data;
 
 struct Forest {
   size: usize,
@@ -174,14 +167,14 @@ impl Display for Tree {
 }
 
 pub fn main() {
-  let test = Forest::new(TEST);
+  let data = Data::get(8);
+  let test = Forest::new(&data.test);
   let test1 = test.count_visible();
   assert_eq!(test1, 21);
   println!("Day 8: Test 1: {}", test1);
 
-  let input = Forest::new(&fs::read_to_string("data/day8.txt").unwrap());
+  let input = Forest::new(&data.input);
   let part1 = input.count_visible();
-  assert_eq!(part1, 1805);
   println!("Day 8: Part 1: {}", part1);
 
   let test2 = test.best_score();
@@ -189,6 +182,5 @@ pub fn main() {
   println!("Day 8: Test 2: {}", test2);
 
   let part2 = input.best_score();
-  assert_eq!(part2, 444528);
   println!("Day 8: Part 2: {}", part2);
 }

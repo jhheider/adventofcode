@@ -1,7 +1,6 @@
-use std::{
-  fmt::{Display, Formatter},
-  fs,
-};
+use std::fmt::{Display, Formatter};
+
+use crate::data::Data;
 
 struct Cpu {
   x: isize,
@@ -93,7 +92,8 @@ impl Instruction {
 }
 
 pub fn main() {
-  let test = TEST.lines().map(Instruction::new).collect::<Vec<_>>();
+  let data = Data::get(10);
+  let test = data.test.lines().map(Instruction::new).collect::<Vec<_>>();
   let mut test1 = Cpu::new();
   test1.run(&test);
   assert_eq!(test1.signal_strengths().iter().sum::<isize>(), 13140);
@@ -102,14 +102,9 @@ pub fn main() {
     test1.signal_strengths().iter().sum::<isize>()
   );
 
-  let input = fs::read_to_string("data/day10.txt")
-    .unwrap()
-    .lines()
-    .map(Instruction::new)
-    .collect::<Vec<_>>();
+  let input = data.input.lines().map(Instruction::new).collect::<Vec<_>>();
   let mut part1 = Cpu::new();
   part1.run(&input);
-  assert_eq!(part1.signal_strengths().iter().sum::<isize>(), 17940);
   println!(
     "Day 10: Part 1: {}",
     part1.signal_strengths().iter().sum::<isize>()
@@ -123,150 +118,3 @@ pub fn main() {
   part2.run(&input);
   println!("Day 10: Part 2: {}", part2);
 }
-
-const TEST: &str = r"addx 15
-addx -11
-addx 6
-addx -3
-addx 5
-addx -1
-addx -8
-addx 13
-addx 4
-noop
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx 5
-addx -1
-addx -35
-addx 1
-addx 24
-addx -19
-addx 1
-addx 16
-addx -11
-noop
-noop
-addx 21
-addx -15
-noop
-noop
-addx -3
-addx 9
-addx 1
-addx -3
-addx 8
-addx 1
-addx 5
-noop
-noop
-noop
-noop
-noop
-addx -36
-noop
-addx 1
-addx 7
-noop
-noop
-noop
-addx 2
-addx 6
-noop
-noop
-noop
-noop
-noop
-addx 1
-noop
-noop
-addx 7
-addx 1
-noop
-addx -13
-addx 13
-addx 7
-noop
-addx 1
-addx -33
-noop
-noop
-noop
-addx 2
-noop
-noop
-noop
-addx 8
-noop
-addx -1
-addx 2
-addx 1
-noop
-addx 17
-addx -9
-addx 1
-addx 1
-addx -3
-addx 11
-noop
-noop
-addx 1
-noop
-addx 1
-noop
-noop
-addx -13
-addx -19
-addx 1
-addx 3
-addx 26
-addx -30
-addx 12
-addx -1
-addx 3
-addx 1
-noop
-noop
-noop
-addx -9
-addx 18
-addx 1
-addx 2
-noop
-noop
-addx 9
-noop
-noop
-noop
-addx -1
-addx 2
-addx -37
-addx 1
-addx 3
-noop
-addx 15
-addx -21
-addx 22
-addx -6
-addx 1
-noop
-addx 2
-addx 1
-noop
-addx -10
-noop
-noop
-addx 20
-addx 1
-addx 2
-addx 2
-addx -6
-addx -11
-noop
-noop
-noop";

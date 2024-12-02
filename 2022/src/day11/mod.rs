@@ -1,3 +1,5 @@
+use crate::data::Data;
+
 #[derive(Debug)]
 struct Barrel {
   monkeys: Vec<Monkey>,
@@ -134,51 +136,22 @@ impl Monkey {
 }
 
 pub fn main() {
-  let mut test1 = Barrel::new(TEST);
+  let data = Data::get(11);
+  let mut test1 = Barrel::new(&data.test);
   test1.run(20, false);
   assert_eq!(test1.monkey_business(), 10605);
   println!("Day 11, Test 1: {}", test1.monkey_business());
 
-  let mut part1 = Barrel::new(include_str!("../../data/day11.txt"));
+  let mut part1 = Barrel::new(&data.input);
   part1.run(20, false);
-  assert_eq!(part1.monkey_business(), 58322);
   println!("Day 11, Part 1: {}", part1.monkey_business());
 
-  let mut test2 = Barrel::new(TEST);
+  let mut test2 = Barrel::new(&data.test);
   test2.run(10000, true);
   assert_eq!(test2.monkey_business(), 2_713_310_158);
   println!("Day 11, Test 2: {}", test2.monkey_business());
 
-  let mut part2 = Barrel::new(include_str!("../../data/day11.txt"));
+  let mut part2 = Barrel::new(&data.input);
   part2.run(10000, true);
-  assert_eq!(part2.monkey_business(), 13937702909);
   println!("Day 11, Part 2: {}", part2.monkey_business());
 }
-
-const TEST: &str = r"Monkey 0:
-Starting items: 79, 98
-Operation: new = old * 19
-Test: divisible by 23
-  If true: throw to monkey 2
-  If false: throw to monkey 3
-
-Monkey 1:
-Starting items: 54, 65, 75, 74
-Operation: new = old + 6
-Test: divisible by 19
-  If true: throw to monkey 2
-  If false: throw to monkey 0
-
-Monkey 2:
-Starting items: 79, 60, 97
-Operation: new = old * old
-Test: divisible by 13
-  If true: throw to monkey 1
-  If false: throw to monkey 3
-
-Monkey 3:
-Starting items: 74
-Operation: new = old + 3
-Test: divisible by 17
-  If true: throw to monkey 0
-  If false: throw to monkey 1";

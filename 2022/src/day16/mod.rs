@@ -3,49 +3,40 @@ use std::{
   rc::Rc,
 };
 
-const TEST: &str = r"Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
-Valve BB has flow rate=13; tunnels lead to valves CC, AA
-Valve CC has flow rate=2; tunnels lead to valves DD, BB
-Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE
-Valve EE has flow rate=3; tunnels lead to valves FF, DD
-Valve FF has flow rate=0; tunnels lead to valves EE, GG
-Valve GG has flow rate=0; tunnels lead to valves FF, HH
-Valve HH has flow rate=22; tunnel leads to valve GG
-Valve II has flow rate=0; tunnels lead to valves AA, JJ
-Valve JJ has flow rate=21; tunnel leads to valve II";
+use crate::data::Data;
 
 #[derive(Clone, Debug)]
 struct Valve {
   flow_rate: usize,
-  tunnels: Vec<&'static str>,
+  tunnels: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
 struct Cave {
-  valves: HashMap<&'static str, Valve>,
+  valves: HashMap<String, Valve>,
 }
 
 #[derive(Clone, Debug)]
 struct State {
   cave: Rc<Cave>,
-  opened: HashSet<&'static str>,
+  opened: HashSet<String>,
   pressure: usize,
-  location: &'static str,
-  last: &'static str,
-  elephant_location: &'static str,
-  elephant_last: &'static str,
+  location: String,
+  last: String,
+  elephant_location: String,
+  elephant_last: String,
   time: usize,
-  history: Vec<(usize, &'static str)>,
+  history: Vec<(usize, String)>,
 }
 
 #[derive(PartialEq)]
 enum Action {
-  Open(&'static str),
-  Move(&'static str),
+  Open(String),
+  Move(String),
 }
 
 impl Valve {
-  fn new(line: &'static str) -> Self {
+  fn new(line: String) -> Self {
     let mut parts = line.split(' ');
     let flow_rate = parts
       .nth(4)
@@ -56,16 +47,24 @@ impl Valve {
       .trim_end_matches(';')
       .parse()
       .unwrap();
-    let tunnels = parts.skip(4).map(|s| s.trim_end_matches(',')).collect();
+    let tunnels = parts
+      .skip(4)
+      .map(|s| s.trim_end_matches(',').to_string())
+      .collect();
     Self { flow_rate, tunnels }
   }
 }
 
 impl Cave {
-  fn new(input: &'static str) -> Self {
+  fn new(input: String) -> Self {
     let valves = input
       .lines()
-      .map(|line| (line.split(' ').nth(1).unwrap(), Valve::new(line)))
+      .map(|line| {
+        (
+          line.split(' ').nth(1).unwrap().to_string(),
+          Valve::new(line.to_string()),
+        )
+      })
       .collect();
     Self { valves }
   }
@@ -75,10 +74,14 @@ impl Cave {
       cave: Rc::new(self.clone()),
       opened: HashSet::new(),
       pressure: 0,
-      location: "AA",
-      last: "",
-      elephant_location: if with_elephant { "AA" } else { "" },
-      elephant_last: "",
+      location: "AA".to_string(),
+      last: "".to_string(),
+      elephant_location: if with_elephant {
+        "AA".to_string()
+      } else {
+        "".to_string()
+      },
+      elephant_last: "".to_string(),
       time: if with_elephant { 4 } else { 0 },
       history: vec![],
     };
@@ -87,12 +90,12 @@ impl Cave {
 }
 
 impl State {
-  fn open(&mut self, valve: &'static str) {
-    if self.opened.contains(valve) {
+  fn open(&mut self, valve: String) {
+    if self.opened.contains(&valve) {
       panic!("{} already opened", valve);
     }
-    self.opened.insert(valve);
-    self.pressure += self.cave.valves.get(valve).unwrap().flow_rate * (30 - self.time);
+    self.opened.insert(valve.clone());
+    self.pressure += self.cave.valves.get(&valve).unwrap().flow_rate * (30 - self.time);
     self.history.push((self.time, valve));
   }
 
@@ -131,38 +134,38 @@ impl State {
         continue;
       }
       let mut next_moves = [vec![], vec![]];
-      let current = state.cave.valves.get(state.location).unwrap();
+      let current = state.cave.valves.get(&state.location).unwrap();
       for tunnel in current.tunnels.iter() {
         if *tunnel == state.last {
           continue;
         }
-        next_moves[0].push(Action::Move(tunnel));
+        next_moves[0].push(Action::Move(tunnel.clone()));
       }
-      if !state.opened.contains(state.location) && current.flow_rate > 0 {
-        next_moves[0].push(Action::Open(state.location));
+      if !state.opened.contains(&state.location) && current.flow_rate > 0 {
+        next_moves[0].push(Action::Open(state.location.clone()));
       }
       if with_elephant {
-        let current2 = state.cave.valves.get(state.elephant_location).unwrap();
+        let current2 = state.cave.valves.get(&state.elephant_location).unwrap();
         for tunnel in current2.tunnels.iter() {
           if *tunnel == state.elephant_last {
             continue;
           }
-          next_moves[1].push(Action::Move(tunnel));
+          next_moves[1].push(Action::Move(tunnel.clone()));
         }
-        if !state.opened.contains(state.elephant_location) && current2.flow_rate > 0 {
-          next_moves[1].push(Action::Open(state.elephant_location));
+        if !state.opened.contains(&state.elephant_location) && current2.flow_rate > 0 {
+          next_moves[1].push(Action::Open(state.elephant_location.clone()));
         }
       }
       for action in next_moves[0].iter() {
         let mut next = state.clone();
         match action {
           Action::Open(valve) => {
-            next.open(valve);
-            next.last = "";
+            next.open(valve.clone());
+            next.last = "".to_string();
           }
           Action::Move(tunnel) => {
             next.last = next.location;
-            next.location = *tunnel;
+            next.location = tunnel.clone();
           }
         }
         if with_elephant {
@@ -173,12 +176,12 @@ impl State {
                 if next2.opened.contains(valve) {
                   continue;
                 }
-                next2.open(valve);
-                next2.elephant_last = "";
+                next2.open(valve.clone());
+                next2.elephant_last = "".to_string();
               }
               Action::Move(tunnel) => {
                 next2.elephant_last = next2.elephant_location;
-                next2.elephant_location = *tunnel;
+                next2.elephant_location = tunnel.clone();
               }
             }
             queue.push_front(next2);
@@ -195,12 +198,13 @@ impl State {
 pub fn main() {
   println!("\n*** Warning: this one takes a while... ***\n");
 
-  let test = Cave::new(TEST);
+  let data = Data::get(16);
+  let test = Cave::new(data.test);
   let test1 = test.search(false);
   assert_eq!(test1, 1651);
   println!("Day 16: Test: 1: {}", test1);
 
-  let input = Cave::new(include_str!("../../data/day16.txt"));
+  let input = Cave::new(data.input);
   let part1 = input.search(false);
   assert_eq!(part1, 1653);
   println!("Day 16: Part 1: {}", part1);

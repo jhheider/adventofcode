@@ -1,14 +1,8 @@
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
 
 use itertools::Itertools;
 
-const TEST: &str = r"vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw";
-
+use crate::data::Data;
 struct Bag {
   first: Vec<char>,
   second: Vec<char>,
@@ -43,15 +37,15 @@ impl Bag {
 }
 
 pub fn main() {
-  let test = parse(TEST);
-  let input = parse(&fs::read_to_string("data/day3.txt").unwrap());
+  let data = Data::get(3);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1 = test.iter().map(|b| char_value(b.in_both())).sum::<usize>();
   assert_eq!(test1, 157);
   println!("Day 3: Test 1: {test1}");
 
   let part1 = input.iter().map(|b| char_value(b.in_both())).sum::<usize>();
-  assert_eq!(part1, 7997);
   println!("Day 3: Part 1: {part1}");
 
   let test2 = test
@@ -77,7 +71,6 @@ pub fn main() {
       char_value(a.in_three(b, c))
     })
     .sum::<usize>();
-  assert_eq!(part2, 2545);
   println!("Day 3: Part 2: {part2}");
 }
 

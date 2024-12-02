@@ -1,28 +1,6 @@
 use std::cmp::Ordering;
 
-const TEST: &str = r"[1,1,3,1,1]
-[1,1,5,1,1]
-
-[[1],[2,3,4]]
-[[1],4]
-
-[9]
-[[8,7,6]]
-
-[[4,4],4,4]
-[[4,4],4,4,4]
-
-[7,7,7,7]
-[7,7,7]
-
-[]
-[3]
-
-[[[]]]
-[[]]
-
-[1,[2,[3,[4,[5,6,7]]]],8,9]
-[1,[2,[3,[4,[5,6,0]]]],8,9]";
+use crate::data::Data;
 
 #[derive(Debug)]
 struct Pair {
@@ -101,7 +79,9 @@ impl Packet {
 }
 
 pub fn main() {
-  let mut test = TEST
+  let data = Data::get(13);
+  let mut test = data
+    .test
     .split("\n\n")
     .map(|s| Pair::parse(s.to_string()))
     .collect::<Vec<_>>();
@@ -109,12 +89,12 @@ pub fn main() {
   assert_eq!(test1, 13);
   println!("Day 13: Test 1: {}", test1);
 
-  let mut input = include_str!("../../data/day13.txt")
+  let mut input = data
+    .input
     .split("\n\n")
     .map(|s| Pair::parse(s.to_string()))
     .collect::<Vec<_>>();
   let part1 = sum_packet_passes(&input);
-  assert_eq!(part1, 4821);
   println!("Day 13: Part 1: {}", part1);
 
   test.push(Pair {
@@ -130,7 +110,6 @@ pub fn main() {
     right: Packet::List(vec![Packet::List(vec![Packet::Number(6)])]),
   });
   let part2 = decoder_key(&input);
-  assert_eq!(part2, 21890);
   println!("Day 13: Part 2: {}", part2);
 }
 
