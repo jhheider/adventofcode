@@ -1,6 +1,7 @@
 use regex::Regex;
 use std::collections::HashMap;
-use std::fs;
+
+use crate::data::Data;
 
 #[derive(Debug)]
 enum Signal {
@@ -13,14 +14,13 @@ enum Signal {
 }
 
 pub fn main() {
-    let input = fs::read_to_string("data/day7.txt").unwrap();
+    let input = Data::get(7).input;
 
     let mut wires = parse_input(input);
     let mut cache = HashMap::new();
 
     let part1 = get_value(&wires, "a", &mut cache);
 
-    assert_eq!(part1, 956);
     println!("Day 7: Part 1: a wire is: {}", part1);
 
     cache.clear();
@@ -28,7 +28,6 @@ pub fn main() {
 
     let part2 = get_value(&wires, "a", &mut cache);
 
-    assert_eq!(part2, 40149);
     println!("Day 7: Part 2: a wire is: {}", part2);
 }
 

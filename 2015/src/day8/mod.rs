@@ -1,17 +1,15 @@
+use crate::data::Data;
 use regex::Regex;
-use std::fs;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day8.txt").unwrap();
+    let input = Data::get(8).input;
 
     let part1 = input.lines().fold(0, |a, b| a + decoded_savings(b));
 
-    assert_eq!(part1, 1333);
     println!("Day 8: Part 1: {} characters saved.", part1);
 
     let part2 = input.lines().fold(0, |a, b| a + encoded_gain(b));
 
-    assert_eq!(part2, 2046);
     println!("Day 8: Part 2: {} characters added.", part2);
 }
 

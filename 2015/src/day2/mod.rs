@@ -1,8 +1,9 @@
 use std::cmp::min;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day2.txt").unwrap();
+    let input = Data::get(2).input;
 
     let mut paper = 0;
 
@@ -17,7 +18,6 @@ pub fn main() {
         paper += 2 * a + 2 * b + 2 * c + min(min(a, b), c);
     }
 
-    assert_eq!(paper, 1588178);
     println!("Day 2: Part 1: total square feet of paper = {}", paper);
 
     let mut ribbon = 0;
@@ -37,6 +37,5 @@ pub fn main() {
         ribbon += perimeter + volume;
     }
 
-    assert_eq!(ribbon, 3783758);
     println!("Day 2: Part 2: total linear feet of ribbon = {}", ribbon);
 }

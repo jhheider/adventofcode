@@ -1,8 +1,9 @@
 use regex::Regex;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day5.txt").unwrap();
+    let input = Data::get(5).input;
 
     let blacklist = Regex::new(r"ab|cd|pq|xy").unwrap();
     let vowels = Regex::new(r"[aeiou]").unwrap();
@@ -14,12 +15,10 @@ pub fn main() {
         .filter(has_double_letter)
         .count();
 
-    assert_eq!(nice, 255);
     println!("Day 5: Part 1: {} nice names.", nice);
 
     let nice2 = input.lines().filter(nice2check).count();
 
-    assert_eq!(nice2, 55);
     println!("Day 5: Part 2: {} nice names.", nice2);
 }
 

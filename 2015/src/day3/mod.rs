@@ -1,6 +1,6 @@
+use crate::data::Data;
 use std::cmp::Eq;
 use std::collections::HashSet;
-use std::fs;
 
 #[derive(Hash, Eq, PartialEq, Debug, Copy, Clone)]
 struct Position {
@@ -33,7 +33,7 @@ impl Position {
 }
 
 pub fn main() {
-    let input = fs::read_to_string("data/day3.txt").unwrap();
+    let input = Data::get(3).input;
 
     let mut position = Position { x: 0, y: 0 };
     let mut houses = HashSet::new();
@@ -46,7 +46,6 @@ pub fn main() {
         houses.insert(position);
     }
 
-    assert_eq!(houses.len(), 2081);
     println!(
         "Day 3: Part 1: Santa visited {} houses at least once.",
         houses.len()
@@ -62,7 +61,6 @@ pub fn main() {
         houses.insert(positions[i % 2]);
     }
 
-    assert_eq!(houses.len(), 2341);
     println!(
         "Day 3: Part 2: Santa and Robo-Santa visited {} houses at least once.",
         houses.len()

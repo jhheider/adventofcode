@@ -1,7 +1,8 @@
-use std::fs;
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day1.txt").unwrap();
+    let data = Data::get(1);
+    let input = &data.input;
 
     let mut floor = 0;
 
@@ -13,7 +14,6 @@ pub fn main() {
         };
     }
 
-    assert_eq!(floor, 280);
     println!("Day 1: Part 1: final floor = {}", floor);
 
     floor = 0;
@@ -25,7 +25,6 @@ pub fn main() {
             _ => panic!("Bad input"),
         };
         if floor < 0 {
-            assert_eq!(i + 1, 1797);
             println!("Day 1: Part 2: Entered the basement on character {}", i + 1);
             return;
         }

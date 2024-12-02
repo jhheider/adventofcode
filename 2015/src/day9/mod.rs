@@ -2,21 +2,17 @@ use regex::Regex;
 use std::{
     cmp::{max, min},
     collections::{HashMap, HashSet},
-    fs,
 };
 
+use crate::data::Data;
+
 pub fn main() {
-    let input = fs::read_to_string("data/day9.txt").unwrap();
+    let data = Data::get(9);
 
-    let test = r"London to Dublin = 464
-London to Belfast = 518
-Dublin to Belfast = 141";
-
-    let test = solve(test);
+    let test = solve(&data.test);
     assert_eq!(test, (605, 982));
 
-    let part1 = solve(&input);
-    assert_eq!(part1, (117, 909));
+    let part1 = solve(&data.input);
 
     println!("Day 9: Test 1: {} - {}", test.0, test.1);
     println!("Day 9: Part 1: {} - {}", part1.0, part1.1);

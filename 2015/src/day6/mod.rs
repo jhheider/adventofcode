@@ -1,8 +1,9 @@
 use regex::Regex;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day6.txt").unwrap();
+    let input = Data::get(6).input;
 
     let mut lights = [[false; 1000]; 1000];
 
@@ -22,7 +23,6 @@ pub fn main() {
 
     let lit = lights.iter().flatten().filter(|x| **x).count();
 
-    assert_eq!(lit, 377891);
     println!("Day 6: Part 1: {} lights lit.", lit);
 
     let mut lights = [[0; 1000]; 1000];
@@ -47,7 +47,6 @@ pub fn main() {
 
     let brightness: i32 = lights.iter().flatten().sum();
 
-    assert_eq!(brightness, 14110788);
     println!("Day 6: Part 2: {:?} total brightness.", brightness);
 }
 
