@@ -86,7 +86,7 @@ impl Image {
           (x + 1, y + 1),
         ] {
           index <<= 1;
-          if self.image.get(&(*dx, *dy)).is_some() {
+          if self.image.contains(&(*dx, *dy)) {
             index += 1;
           }
         }
@@ -97,7 +97,7 @@ impl Image {
     }
     // Special case for "toggle" rules
     if algorithm.lookup(0) && !algorithm.lookup(511) {
-      if self.image.get(&(self.left - 1, self.top - 1)).is_none() {
+      if !self.image.contains(&(self.left - 1, self.top - 1)) {
         for i in self.left - 3..=self.right + 3 {
           new_image.insert((i, self.top - 3));
           new_image.insert((i, self.top - 2));

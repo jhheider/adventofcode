@@ -41,7 +41,7 @@ fn find_prior(input: Vec<isize>) -> isize {
   di.last().cloned().unwrap()
 }
 
-fn derive(input: &Vec<isize>) -> Vec<isize> {
+fn derive(input: &[isize]) -> Vec<isize> {
   let mut next = vec![];
   let mut out = input.to_vec();
 

@@ -37,7 +37,7 @@ impl Cave {
 }
 
 pub fn main() {
-  let tests = vec![
+  let tests = [
     parse(
       r"start-A
 start-b

@@ -141,7 +141,7 @@ pub fn main() {
 }
 
 fn min_mana(start: GameState) -> usize {
-    let mut min_mana = usize::max_value();
+    let mut min_mana = usize::MAX;
     let spells = vec![
         Spell::new(53, Effect::MagicMissile),
         Spell::new(73, Effect::Drain),

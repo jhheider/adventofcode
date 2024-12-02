@@ -24,6 +24,7 @@ jobs:
         - 2021
         - 2022
         - 2023
+        - 2024
     steps:
       - uses: actions/checkout@v3
       - uses: pkgxdev/setup@v1
