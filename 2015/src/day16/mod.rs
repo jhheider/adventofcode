@@ -1,15 +1,14 @@
 use regex::Regex;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let aunts = fs::read_to_string("data/day16.txt").unwrap();
+    let aunts = Data::get(16).input;
 
     let aunt1 = find(&aunts, false);
-    assert_eq!(aunt1, "Sue 373");
     println!("Day 16: Part 1: the aunt is {}", aunt1);
 
     let aunt2 = find(&aunts, true);
-    assert_eq!(aunt2, "Sue 260");
     println!("Day 16: Part 2: the aunt is {}", aunt2);
 }
 

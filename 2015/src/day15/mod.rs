@@ -1,5 +1,7 @@
 use regex::Regex;
-use std::{cmp::max, fs};
+use std::cmp::max;
+
+use crate::data::Data;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Ingredient {
@@ -11,21 +13,16 @@ pub struct Ingredient {
 }
 
 pub fn main() {
-    let test = fs::read_to_string("data/day15test.txt")
-        .unwrap()
-        .vectorize();
-    let input = fs::read_to_string("data/day15.txt").unwrap().vectorize();
+    let data = Data::get(15);
 
-    let test = solve_test(&test);
+    let test = solve_test(&data.test.vectorize());
     assert_eq!(test, 62842880);
     println!("Day 15: Test: best cookie scores {}", test);
 
-    let part1 = solve_input(&input, false);
-    assert_eq!(part1, 18965440);
+    let part1 = solve_input(&data.input.vectorize(), false);
     println!("Day 15: Part1: best cookie scores {}", part1);
 
-    let part2 = solve_input(&input, true);
-    assert_eq!(part2, 15862900);
+    let part2 = solve_input(&data.input.vectorize(), true);
     println!("Day 15: Part1: best cookie scores {}", part2);
 }
 

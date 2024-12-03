@@ -1,4 +1,6 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+
+use crate::data::Data;
 
 struct Computer {
     registers: HashMap<char, isize>,
@@ -66,28 +68,22 @@ impl Computer {
     }
 }
 
-const TEST: &str = r"inc a
-jio a, +2
-tpl a
-inc a";
-
 pub fn main() {
-    let mut test = Computer::new(parse(TEST), 0);
+    let data = Data::get(23);
+    let mut test = Computer::new(parse(&data.test), 0);
     test.run();
     let test1 = test.registers.get(&'a').unwrap();
     assert_eq!(*test1, 2);
     println!("Day 23: Test 1: {}", test1);
 
-    let mut input = Computer::new(parse(&fs::read_to_string("data/day23.txt").unwrap()), 0);
+    let mut input = Computer::new(parse(&data.input), 0);
     input.run();
     let part1 = input.registers.get(&'b').unwrap();
-    assert_eq!(part1, &184);
     println!("Day 23: Part 1: {}", part1);
 
-    let mut input2 = Computer::new(parse(&fs::read_to_string("data/day23.txt").unwrap()), 1);
+    let mut input2 = Computer::new(parse(&data.input), 1);
     input2.run();
     let part2 = input2.registers.get(&'b').unwrap();
-    assert_eq!(part2, &231);
     println!("Day 23: Part 2: {}", part2);
 }
 

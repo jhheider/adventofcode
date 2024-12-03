@@ -65,15 +65,32 @@ David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.", // Day 13
     "Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
 Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.", // Day 14
-    "",           // Day 15
-    "",           // Day 16
+    "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
+Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
+Butterscotch2: capacity -1, durability -2, flavor 6, texture 3, calories 8
+Cinnamon2: capacity 2, durability 3, flavor -2, texture -1, calories 3", // Day 15
+    "Sue 1: children 3", // Day 16
     "",           // Day 17
-    "",           // Day 18
-    "",           // Day 19
+    ".#.#.#
+...##.
+#....#
+..#...
+#.#..#
+####..", // Day 18
+    "e => H
+e => O
+H => HO
+H => OH
+O => HH
+
+HOH", // Day 19
     "",           // Day 20
     "",           // Day 21
     "",           // Day 22
-    "",           // Day 23
+    "inc a
+jio a, +2
+tpl a
+inc a", // Day 23
     "",           // Day 24
     "",           // Day 25
 ];

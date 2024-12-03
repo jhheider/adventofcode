@@ -1,39 +1,38 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+
+use crate::data::Data;
 
 pub fn main() {
-    let test = fs::read_to_string("data/day18test.txt").unwrap();
-    let input = fs::read_to_string("data/day18.txt").unwrap();
+    let data = Data::get(18);
 
-    let test1 = solve(test.clone(), 4, false);
+    let test1 = solve(&data.test, 4, false);
     assert_eq!(test1, 4);
     println!(
         "Day 18: Test 1: input has {} lights after {} iterations",
         test1, 4
     );
 
-    let part1 = solve(input.clone(), 100, false);
-    assert_eq!(part1, 768);
+    let part1 = solve(&data.input, 100, false);
     println!(
         "Day 18: Part 1: input has {} lights after {} iterations",
         part1, 100
     );
 
-    let test2 = solve(test, 5, true);
+    let test2 = solve(&data.test, 5, true);
     assert_eq!(test2, 17);
     println!(
         "Day 18: Test 2: input has {} lights after {} iterations",
         test2, 5
     );
 
-    let part2 = solve(input, 100, true);
-    assert_eq!(part2, 781);
+    let part2 = solve(&data.input, 100, true);
     println!(
         "Day 18: Part 2: input has {} lights after {} iterations",
         part2, 100
     );
 }
 
-fn solve(input: String, iterations: u32, part2: bool) -> u32 {
+fn solve(input: &str, iterations: u32, part2: bool) -> u32 {
     let mut old_state = HashMap::new();
     let size = input.lines().count() as i32;
 

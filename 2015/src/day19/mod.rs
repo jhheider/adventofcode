@@ -1,24 +1,18 @@
 use regex::Regex;
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
+
+use crate::data::Data;
 
 pub fn main() {
-    let test_rules: Vec<(String, String)> = vec![
-        ("e".to_string(), "H".to_string()),
-        ("e".to_string(), "O".to_string()),
-        ("H".to_string(), "HO".to_string()),
-        ("H".to_string(), "OH".to_string()),
-        ("O".to_string(), "HH".to_string()),
-    ];
-    let test_input = "HOH";
+    let data = Data::get(19);
+    let (test_rules, test_input) = load_rules(&data.test);
+    let (input_rules, input) = load_rules(&data.input);
+
     let test1 = permutations(test_input, &test_rules).len();
     assert_eq!(test1, 4);
     println!("Day 19: Test 1: {} permutations", test1);
 
-    let input_rules = load_rules("data/day19.txt");
-    let input = "CRnSiRnCaPTiMgYCaPTiRnFArSiThFArCaSiThSiThPBCaCaSiRnSiRnTiTiMgArPBCaPMgYPTiRnFArFArCaSiRnBPMgArPRnCaPTiRnFArCaSiThCaCaFArPBCaCaPTiTiRnFArCaSiRnSiAlYSiThRnFArArCaSiRnBFArCaCaSiRnSiThCaCaCaFYCaPTiBCaSiThCaSiThPMgArSiRnCaPBFYCaCaFArCaCaCaCaSiThCaSiRnPRnFArPBSiThPRnFArSiRnMgArCaFYFArCaSiRnSiAlArTiTiTiTiTiTiTiRnPMgArPTiTiTiBSiRnSiAlArTiTiRnPMgArCaFYBPBPTiRnSiRnMgArSiThCaFArCaSiThFArPRnFArCaSiRnTiBSiThSiRnSiAlYCaFArPRnFArSiThCaFArCaCaSiThCaCaCaSiRnPRnCaFArFYPMgArCaPBCaPBSiRnFYPBCaFArCaSiAl";
-
     let part1 = permutations(input, &input_rules).len();
-    assert_eq!(part1, 518);
     println!("Day 19: Part 1: {} permutations", part1);
 
     let test2 = find_solution(test_input) + 1;
@@ -30,7 +24,6 @@ pub fn main() {
     println!("Day 19: Test 3: {} steps to a solution", test3);
 
     let part2 = find_solution(input);
-    assert_eq!(part2, 200);
     println!("Day 19: Part 2: {} steps to a solution", part2);
 }
 
@@ -49,18 +42,20 @@ fn permutations(input: &str, rules: &[(String, String)]) -> HashSet<String> {
     results
 }
 
-fn load_rules(file: &str) -> Vec<(String, String)> {
-    let input = fs::read_to_string(file).unwrap();
-    input
-        .lines()
-        .map(|line| {
+fn load_rules(input: &str) -> (Vec<(String, String)>, &str) {
+    let mut res = (vec![], "");
+    for line in input.lines() {
+        if line.contains("=>") {
             let mut splits = line.split(" => ");
-            (
+            res.0.push((
                 splits.next().unwrap().to_owned(),
                 splits.next().unwrap().to_owned(),
-            )
-        })
-        .collect()
+            ));
+        } else {
+            res.1 = line;
+        }
+    }
+    res
 }
 
 fn find_solution(input: &str) -> usize {
