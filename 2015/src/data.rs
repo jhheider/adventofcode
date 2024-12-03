@@ -49,10 +49,22 @@ NOT y -> i", // Day 7
 London to Belfast = 518
 Dublin to Belfast = 141", // Day 9
     "111221",     // Day 10
-    "",           // Day 11
-    "",           // Day 12
-    "",           // Day 13
-    "",           // Day 14
+    "aaaaaaaa",   // Day 11
+    "{\"a\":{\"b\":4},\"c\":-1}", // Day 12
+    "Alice would gain 54 happiness units by sitting next to Bob.
+Alice would lose 79 happiness units by sitting next to Carol.
+Alice would lose 2 happiness units by sitting next to David.
+Bob would gain 83 happiness units by sitting next to Alice.
+Bob would lose 7 happiness units by sitting next to Carol.
+Bob would lose 63 happiness units by sitting next to David.
+Carol would lose 62 happiness units by sitting next to Alice.
+Carol would gain 60 happiness units by sitting next to Bob.
+Carol would gain 55 happiness units by sitting next to David.
+David would gain 46 happiness units by sitting next to Alice.
+David would lose 7 happiness units by sitting next to Bob.
+David would gain 41 happiness units by sitting next to Carol.", // Day 13
+    "Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.", // Day 14
     "",           // Day 15
     "",           // Day 16
     "",           // Day 17

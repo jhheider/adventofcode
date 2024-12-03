@@ -1,26 +1,24 @@
 use regex::Regex;
 use std::cmp::{max, min};
 use std::collections::HashMap;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let test = fs::read_to_string("data/day14test.txt").unwrap();
-    let input = fs::read_to_string("data/day14.txt").unwrap();
+    let data = Data::get(14);
 
-    let test1 = compute(&test, 1000, false);
+    let test1 = compute(&data.test, 1000, false);
     assert_eq!(test1, 1120);
     println!("Day 14: Test 1: winner is at {}km", test1);
 
-    let part1 = compute(&input, 2503, false);
-    assert_eq!(part1, 2640);
+    let part1 = compute(&data.input, 2503, false);
     println!("Day 14: Part 1: winner is at {}km", part1);
 
-    let test2 = compute(&test, 1000, true);
+    let test2 = compute(&data.test, 1000, true);
     assert_eq!(test2, 689);
     println!("Day 14: Test 2: winner is at {} points", test2);
 
-    let part2 = compute(&input, 2503, true);
-    assert_eq!(part2, 1102);
+    let part2 = compute(&data.input, 2503, true);
     println!("Day 14: Part 2: winner is at {} points", part2);
 }
 

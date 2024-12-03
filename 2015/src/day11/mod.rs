@@ -1,8 +1,10 @@
 use fancy_regex::*;
 use std::char;
 
+use crate::data::Data;
+
 pub fn main() {
-    let mut input = String::from("hepxcrrq");
+    let mut input = Data::get(11).input;
 
     let part1 = loop {
         input = bump(input);
@@ -10,7 +12,6 @@ pub fn main() {
             break input;
         }
     };
-    assert_eq!(part1, "hepxxyzz");
     println!("Day 11: Part 1: next password is {}", part1);
 
     input = part1;
@@ -22,7 +23,6 @@ pub fn main() {
         }
     };
 
-    assert_eq!(part2, "heqaabcc");
     println!("Day 11: Part 2: next password is {}", part2);
 }
 

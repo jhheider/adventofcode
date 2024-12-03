@@ -1,23 +1,21 @@
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day13.txt").unwrap();
-    let test = fs::read_to_string("data/day13test.txt").unwrap();
+    let data = Data::get(13);
 
-    let test = solve(&test, false);
+    let test = solve(&data.test, false);
     assert_eq!(test, 330);
 
     println!("Day 13: Test: {}", test);
 
-    let part1 = solve(&input, false);
-    assert_eq!(part1, 709);
+    let part1 = solve(&data.input, false);
 
     println!("Day 13: Part 1: {}", part1);
 
-    let part2 = solve(&input, true);
-    assert_eq!(part2, 668);
+    let part2 = solve(&data.input, true);
 
     println!("Day 13: Part 2: {}", part2);
 }

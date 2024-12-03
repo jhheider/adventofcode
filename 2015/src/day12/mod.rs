@@ -1,9 +1,10 @@
 use regex::Regex;
 use serde_json::Value;
-use std::fs;
+
+use crate::data::Data;
 
 pub fn main() {
-    let input = fs::read_to_string("data/day12.txt").unwrap();
+    let input = Data::get(12).input;
 
     let number = Regex::new("(-?[0-9]+)").unwrap();
 
@@ -13,14 +14,12 @@ pub fn main() {
         part1 += c.as_str().parse::<i64>().unwrap();
     }
 
-    assert_eq!(part1, 191164);
     println!("Day 12: Part 1: total = {}", part1);
 
     let json: Value = serde_json::from_str(&input).unwrap();
 
     let part2 = walk_tree(&json);
 
-    assert_eq!(part2, 87842);
     println!("Day 12: Part 2: total = {}", part2);
 }
 
