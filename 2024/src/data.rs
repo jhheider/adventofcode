@@ -36,7 +36,16 @@ const TESTS: [&str; 25] = [
 8 6 4 4 1
 1 3 6 7 9", // Day 2
   "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))", // Day 3
-  "",
+  "MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX", // Day 4
   "",
   "",
   "",
