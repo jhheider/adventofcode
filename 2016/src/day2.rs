@@ -1,10 +1,6 @@
 use std::fmt::{Display, Error, Formatter};
-use std::fs;
 
-const TEST: &str = "ULL
-RRDDD
-LURDL
-UUUUD";
+use crate::data::Data;
 
 trait Button: Clone + Display {
   fn next(&self, dir: Direction) -> Self;
@@ -248,7 +244,7 @@ impl<T> Code<T>
 where
   T: Button,
 {
-  fn apply(&mut self, code: String) -> &mut Code<T> {
+  fn apply(&mut self, code: &str) -> &mut Code<T> {
     for line in code.lines() {
       for c in line.chars() {
         let dir: Direction = c.into();
@@ -265,14 +261,14 @@ pub fn main() {
     buttons: Vec::new(),
     pos: NineKeyButton::Five,
   };
-  let input = fs::read_to_string("data/day2.txt").unwrap();
+  let data = Data::get(2);
 
   let mut test1 = start.clone();
-  test1.apply(TEST.to_string());
+  test1.apply(&data.test);
   println!("Day 2, Test 1: {}", test1);
 
   let mut p1 = start.clone();
-  p1.apply(input.clone());
+  p1.apply(&data.input);
   println!("Day 2, Part 1: {}", p1);
 
   let start2 = Code {
@@ -281,10 +277,10 @@ pub fn main() {
   };
 
   let mut test2 = start2.clone();
-  test2.apply(TEST.to_string());
+  test2.apply(&data.test);
   println!("Day 2, Test 2: {}", test2);
 
   let mut p2 = start2.clone();
-  p2.apply(input.clone());
+  p2.apply(&data.input);
   println!("Day 2, Part 2: {}", p2);
 }

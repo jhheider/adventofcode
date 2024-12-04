@@ -1,6 +1,5 @@
 use std::env;
 
-mod data;
 mod day1;
 mod day10;
 mod day11;

@@ -1,5 +1,6 @@
 use std::collections::HashSet;
-use std::fs;
+
+use crate::data::Data;
 
 #[derive(Debug, Clone)]
 enum Direction {
@@ -65,7 +66,7 @@ impl From<&str> for Turn {
 }
 
 pub fn main() {
-  let input = fs::read_to_string("data/day1.txt").unwrap();
+  let input = Data::get(1).input;
 
   let final_pos = input.split(", ").fold(
     Position {
