@@ -1,12 +1,6 @@
+use crate::data::Data;
 use std::cmp::Ordering;
 use std::collections::HashMap;
-use std::fs;
-
-const TEST: &str = r"32T3K 765
-T55J5 684
-KK677 28
-KTJJT 220
-QQQJA 483";
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 enum Card {
@@ -162,20 +156,20 @@ impl Game {
 }
 
 pub fn main() {
-  let test = Game::new(TEST, false).score();
+  let data = Data::get(7);
+  let test = Game::new(&data.test, false).score();
 
   println!("Day 7, Test 1: {}", test);
 
-  let input = fs::read_to_string("data/day7.txt").unwrap();
-  let part1 = Game::new(&input, false).score();
+  let part1 = Game::new(&data.input, false).score();
 
   println!("Day 7, Part 1: {}", part1);
 
-  let test = Game::new(TEST, true).score();
+  let test = Game::new(&data.test, true).score();
 
   println!("Day 7, Test 2: {}", test);
 
-  let part2 = Game::new(&input, true).score();
+  let part2 = Game::new(&data.input, true).score();
 
   println!("Day 7, Part 2: {}", part2);
 }

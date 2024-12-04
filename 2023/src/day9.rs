@@ -1,24 +1,20 @@
-use std::fs;
-
-const TEST: &str = r"0 3 6 9 12 15
-1 3 6 10 15 21
-10 13 16 21 30 45";
+use crate::data::Data;
 
 pub fn main() {
-  let test1 = TEST.lines().map(parse).map(find_next).sum::<isize>();
+  let data = Data::get(9);
+  let test1 = data.test.lines().map(parse).map(find_next).sum::<isize>();
 
   println!("Day 9 Part 1: {}", test1);
 
-  let input = fs::read_to_string("data/day9.txt").unwrap();
-  let part1 = input.lines().map(parse).map(find_next).sum::<isize>();
+  let part1 = data.input.lines().map(parse).map(find_next).sum::<isize>();
 
   println!("Day 9 Part 1: {}", part1);
 
-  let test2 = TEST.lines().map(parse).map(find_prior).sum::<isize>();
+  let test2 = data.test.lines().map(parse).map(find_prior).sum::<isize>();
 
   println!("Day 9 Part 2: {}", test2);
 
-  let part2 = input.lines().map(parse).map(find_prior).sum::<isize>();
+  let part2 = data.input.lines().map(parse).map(find_prior).sum::<isize>();
 
   println!("Day 9 Part 2: {}", part2);
 }

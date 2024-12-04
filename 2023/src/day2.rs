@@ -1,11 +1,5 @@
+use crate::data::Data;
 use std::cmp::max;
-use std::fs;
-
-const TEST: &str = r"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
-Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
-Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
-Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";
 
 struct Game {
   id: u32,
@@ -70,7 +64,8 @@ impl Pull {
 }
 
 pub fn main() {
-  let test_games = TEST.lines().map(Game::new).collect::<Vec<_>>();
+  let data = Data::get(2);
+  let test_games = data.test.lines().map(Game::new).collect::<Vec<_>>();
   let bag = Bag {
     blue: 14,
     green: 13,
@@ -84,8 +79,7 @@ pub fn main() {
     .sum::<u32>();
   println!("Day 2, Test: {}", test);
 
-  let input = fs::read_to_string("data/day2.txt").unwrap();
-  let games = input.lines().map(Game::new).collect::<Vec<_>>();
+  let games = data.input.lines().map(Game::new).collect::<Vec<_>>();
   let part1 = games
     .iter()
     .filter(|game| game.valid(&bag))

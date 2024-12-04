@@ -1,6 +1,7 @@
 use num::integer::lcm;
 use std::collections::HashMap;
-use std::fs;
+
+use crate::data::Data;
 
 const TEST1: &str = r"RL
 
@@ -12,13 +13,7 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 Zzz = (ZZZ, ZZZ)";
 
-const TEST2: &str = r"LLR
-
-AAA = (BBB, BBB)
-BBB = (AAA, ZZZ)
-Zzz = (ZZZ, ZZZ)";
-
-const TEST3: &str = r"LR
+const TEST2: &str = r"LR
 
 11A = (11B, XXX)
 11B = (XXX, 11Z)
@@ -120,25 +115,24 @@ impl Map {
 }
 
 pub fn main() {
+  let data = Data::get(8);
   let test1 = Map::new(TEST1).single_run();
 
   println!("Day 8, Test 1: {}", test1);
 
-  let test2 = Map::new(TEST2).single_run();
+  let test2 = Map::new(&data.test).single_run();
 
   println!("Day 8, Test 2: {}", test2);
 
-  let input = fs::read_to_string("data/day8.txt").unwrap();
-
-  let part1 = Map::new(&input).single_run();
+  let part1 = Map::new(&data.input).single_run();
 
   println!("Day 8, Part 1: {}", part1);
 
-  let test3 = Map::new(TEST3).ghost_run();
+  let test3 = Map::new(TEST2).ghost_run();
 
   println!("Day 8, Test 3: {}", test3);
 
-  let part2 = Map::new(&input).ghost_run();
+  let part2 = Map::new(&data.input).ghost_run();
 
   println!("Day 8, Part 2: {}", part2);
 }

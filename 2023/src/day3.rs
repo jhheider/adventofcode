@@ -1,16 +1,6 @@
 use std::collections::HashSet;
-use std::fs;
 
-const TEST: &str = r"467..114..
-...*......
-..35..633.
-......#...
-617*......
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598..";
+use crate::data::Data;
 
 #[derive(Hash, PartialEq, Eq, Debug)]
 enum Direction {
@@ -40,11 +30,12 @@ impl Direction {
 }
 
 pub fn main() {
-  let test = parse(TEST);
+  let data = Data::get(3);
+  let test = parse(&data.test);
   let test1 = part1(&test);
   println!("Day 3, Test 1: {}", test1);
 
-  let input = parse(&fs::read_to_string("data/day3.txt").unwrap());
+  let input = parse(&data.input);
   let part1 = part1(&input);
   println!("Day 3, Part 1: {}", part1);
 

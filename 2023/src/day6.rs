@@ -1,25 +1,23 @@
-use std::fs;
-
-const TEST: &str = r"Time:      7  15   30
-Distance:  9  40  200";
+use crate::data::Data;
 
 pub fn main() {
-  let test = parse(TEST);
+  let data = Data::get(6);
+  let test = parse(&data.test);
   let test_wins = test.iter().map(|i| i.wins()).product::<usize>();
 
   println!("Day 6, Test 1: {}", test_wins);
 
-  let input = parse(&fs::read_to_string("data/day6.txt").unwrap());
+  let input = parse(&data.input);
   let part1 = input.iter().map(|i| i.wins()).product::<usize>();
 
   println!("Day 6, Part 1: {}", part1);
 
-  let test2 = parse2(TEST);
+  let test2 = parse2(&data.test);
   let test2_wins = test2.wins();
 
   println!("Day 6, Test 2: {}", test2_wins);
 
-  let input2 = parse2(&fs::read_to_string("data/day6.txt").unwrap());
+  let input2 = parse2(&data.input);
   let part2 = input2.wins();
 
   println!("Day 6, Part 2: {}", part2);

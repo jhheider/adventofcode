@@ -1,29 +1,21 @@
-use std::fs;
+use crate::data::Data;
 
 const TEST: &str = r"1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet";
 
-const TEST2: &str = r"two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen";
-
 pub fn main() {
+  let data = Data::get(1);
   let test = compute_sum(TEST, false);
   println!("Day 1, Test: {}", test);
 
-  let input = fs::read_to_string("data/day1.txt").unwrap();
-  println!("Day 1, Part 1: {}", compute_sum(&input, false));
+  println!("Day 1, Part 1: {}", compute_sum(&data.input, false));
 
-  let test2 = compute_sum(TEST2, true);
+  let test2 = compute_sum(&data.test, true);
   println!("Day 1, Test2: {}", test2);
 
-  println!("Day 1, Part 2: {}", compute_sum(&input, true));
+  println!("Day 1, Part 2: {}", compute_sum(&data.input, true));
 }
 
 fn compute_sum(input: &str, part2: bool) -> u32 {
