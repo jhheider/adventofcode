@@ -3,4 +3,11 @@ default:
 
 # template for a new year in rust
 new-year YEAR:
-  @test ! -e {{YEAR}} && mkdir -p {{YEAR}}/{src,data} && cp 2022/src/main.rs {{YEAR}}/src/main.rs && for i in `seq 1 25`; do touch {{YEAR}}/data/day$i.txt; mkdir {{YEAR}}/src/day$i; echo 'pub fn main() {}' >{{YEAR}}/src/day$i/mod.rs; done && echo 'tab_spaces = 2' >{{YEAR}}/.rustfmt.toml && echo '[package]\nname = "aoc{{YEAR}}"\nversion = "0.1.0"\nedition = "2021"\n\n[dependencies]\nregex = "*"' >{{YEAR}}/Cargo.toml
+  @test ! -e {{YEAR}}
+  mkdir -p {{YEAR}}/{src,data}
+  cp .template/main.rs {{YEAR}}/src/main.rs
+  cp .template/data.rs {{YEAR}}/src/data.rs
+  touch {{YEAR}}/data/day1.txt
+  for i in `seq 1 25`; do cp .template/day.rs {{YEAR}}/src/day$i.rs; done
+  cargo init {{YEAR}} --name aoc{{YEAR}} --edition 2021
+  cargo add regex --manifest-path {{YEAR}}/Cargo.toml
