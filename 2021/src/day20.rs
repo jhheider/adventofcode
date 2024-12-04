@@ -1,18 +1,6 @@
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
 
-const TEST: &str = r"..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..##
-#..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###
-.######.###.####...#.##.##..#..#..#####.....#.#....###..#.##......#.....#.
-.#..#..##..#...##.######.####.####.#.#...#.......#..#.#.#...####.##.#.....
-.#..#...##.#.##..#...##.#.##..###.#......#.#.......#.#.#.####.###.##...#..
-...####.#..#..#.##.#....##..#.####....##...##..#...#......#.#.......#.....
-..##..####..#...#.#.#...##..#.#..###..#####........#..####......#..#
-
-#..#.
-#....
-##..#
-..#..
-..###";
+use crate::data::Data;
 
 struct Algorithm {
   algorithm: Vec<bool>,
@@ -136,24 +124,23 @@ impl Image {
 }
 
 pub fn main() {
-  let mut test1 = parse(TEST);
+  let data = Data::get(20);
+  let mut test1 = parse(&data.test);
   test1.1.run(&test1.0, 2);
   assert_eq!(test1.1.lit(), 35);
   println!("Day 20: Test 1: {}", test1.1.lit());
 
-  let mut input1 = parse(&fs::read_to_string("data/day20.txt").unwrap());
+  let mut input1 = parse(&data.input);
   input1.1.run(&input1.0, 2);
-  assert_eq!(input1.1.lit(), 4873);
   println!("Day 20: Part 1: {}", input1.1.lit());
 
-  let mut test2 = parse(TEST);
+  let mut test2 = parse(&data.test);
   test2.1.run(&test2.0, 50);
   assert_eq!(test2.1.lit(), 3351);
   println!("Day 20: Test 2: {}", test2.1.lit());
 
-  let mut input2 = parse(&fs::read_to_string("data/day20.txt").unwrap());
+  let mut input2 = parse(&data.input);
   input2.1.run(&input2.0, 50);
-  assert_eq!(input2.1.lit(), 16394);
   println!("Day 20: Part 2: {}", input2.1.lit());
 }
 

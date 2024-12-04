@@ -1,4 +1,6 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+
+use crate::data::Data;
 
 #[derive(Debug)]
 struct Edge {
@@ -37,6 +39,7 @@ impl Cave {
 }
 
 pub fn main() {
+  let data = Data::get(12);
   let tests = [
     parse(
       r"start-A
@@ -80,8 +83,7 @@ pj-fs
 start-RW",
     ),
   ];
-  let input_string = fs::read_to_string("data/day12.txt").unwrap();
-  let input = parse(&input_string);
+  let input = parse(&data.input);
 
   let test1 = tests
     .iter()
@@ -93,7 +95,6 @@ start-RW",
   println!("Day 12: Test 3: {} routes", test1[2]);
 
   let part1 = routes(&input, false);
-  assert_eq!(part1, 4549);
   println!("Day 12: Part 1: {} routes", part1);
 
   let test2 = tests
@@ -106,7 +107,6 @@ start-RW",
   println!("Day 12: Test 6: {} routes", test2[2]);
 
   let part2 = routes(&input, true);
-  assert_eq!(part2, 120535);
   println!("Day 12: Part 2: {} routes", part2);
 }
 

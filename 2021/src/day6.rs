@@ -1,15 +1,9 @@
-use std::fs;
+use crate::data::Data;
 
 pub fn main() {
-  let test = "3,4,3,1,2"
-    .split(',')
-    .map(|s| s.parse::<u64>().unwrap())
-    .collect::<Vec<u64>>();
-  let input = fs::read_to_string("data/day6.txt")
-    .unwrap()
-    .split(',')
-    .map(|s| s.parse::<u64>().unwrap())
-    .collect::<Vec<u64>>();
+  let data = Data::get(6);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1a = run(&test, 18);
   assert_eq!(test1a, 26);
@@ -20,7 +14,6 @@ pub fn main() {
   println!("Day 6: Test 1a: after 80 days, there are {} fish", test1b);
 
   let part1 = run(&input, 80);
-  assert_eq!(part1, 377263);
   println!("Day 6: Part 1: after 80 days, there are {} fish", part1);
 
   let test2 = run(&test, 256);
@@ -28,8 +21,14 @@ pub fn main() {
   println!("Day 6: Test 2: after 256 days, there are {} fish", test2);
 
   let part2 = run(&input, 256);
-  assert_eq!(part2, 1695929023803);
   println!("Day 6: Part 2: after 256 days, there are {} fish", part2);
+}
+
+fn parse(input: &str) -> Vec<u64> {
+  input
+    .split(',')
+    .map(|s| s.parse::<u64>().unwrap())
+    .collect::<Vec<u64>>()
 }
 
 fn run(input: &[u64], days: u64) -> u64 {

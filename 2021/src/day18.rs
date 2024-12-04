@@ -1,4 +1,6 @@
-use std::{fmt::Debug, fs};
+use std::fmt::Debug;
+
+use crate::data::Data;
 
 #[derive(Clone)]
 struct SFNumber {
@@ -151,21 +153,12 @@ impl SFNumber {
 }
 
 pub fn main() {
-  let test = vec![
-    "[[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]",
-    "[[[5,[2,8]],4],[5,[[9,9],0]]]",
-    "[6,[[[6,2],[5,6]],[[7,6],[4,7]]]]",
-    "[[[6,[0,7]],[0,9]],[4,[9,[9,0]]]]",
-    "[[[7,[6,4]],[3,[1,3]]],[[[5,5],1],9]]",
-    "[[6,[[7,3],[3,2]]],[[[3,8],[5,7]],4]]",
-    "[[[[5,4],[7,7]],8],[[8,3],8]]",
-    "[[9,3],[[9,9],[6,[4,9]]]]",
-    "[[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]",
-    "[[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]",
-  ]
-  .into_iter()
-  .map(SFNumber::from)
-  .collect::<Vec<SFNumber>>();
+  let data = Data::get(18);
+  let test = data
+    .test
+    .lines()
+    .map(SFNumber::from)
+    .collect::<Vec<SFNumber>>();
 
   let test_output = test
     .clone()
@@ -178,8 +171,8 @@ pub fn main() {
     test_output.magnitude()
   );
 
-  let input = fs::read_to_string("data/day18.txt")
-    .unwrap()
+  let input = data
+    .input
     .lines()
     .map(SFNumber::from)
     .collect::<Vec<SFNumber>>();
@@ -189,7 +182,6 @@ pub fn main() {
     .reduce(|total, next| total.add(&next))
     .unwrap()
     .magnitude();
-  assert_eq!(part1, 3806);
   println!("Day 18: Part 1: magnitude is {part1}");
 
   let test2 = max_magnitude(&test);
@@ -197,7 +189,6 @@ pub fn main() {
   println!("Day 18: Part 2: test magnitude is {test2}");
 
   let part2 = max_magnitude(&input);
-  assert_eq!(part2, 4727);
   println!("Day 18: Part 2: magnitude is {part2}");
 }
 

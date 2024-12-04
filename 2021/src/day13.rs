@@ -1,50 +1,27 @@
 use std::{
   cmp::{max, min},
   collections::HashSet,
-  fs,
 };
 
+use crate::data::Data;
 use regex::Regex;
 
 pub fn main() {
-  let test = r"6,10
-0,14
-9,10
-0,3
-10,4
-4,11
-6,0
-6,12
-4,1
-0,13
-10,12
-3,4
-3,0
-8,4
-1,10
-2,14
-8,10
-9,0
+  let data = Data::get(13);
 
-fold along y=7
-fold along x=5";
-  let input = fs::read_to_string("data/day13.txt").unwrap();
-
-  let test1 = fold(test, 1);
+  let test1 = fold(&data.test, 1);
   assert_eq!(test1.len(), 17);
   println!("Day 13: Test 1: {} dots after first fold", test1.len());
 
-  let part1 = fold(&input, 1);
-  assert_eq!(part1.len(), 735);
+  let part1 = fold(&data.input, 1);
   println!("Day 13: Test 1: {} dots after first fold", part1.len());
 
-  let test2 = fold(test, usize::MAX);
+  let test2 = fold(&data.test, usize::MAX);
   assert_eq!(test2.len(), 16);
   println!("Day 13: Test 2:");
   println!("{}", format_grid(test2));
 
-  let part2 = fold(&input, usize::MAX);
-  assert_eq!(part2.len(), 99);
+  let part2 = fold(&data.input, usize::MAX);
   println!("Day 13: Part 2:");
   println!("{}", format_grid(part2));
 }

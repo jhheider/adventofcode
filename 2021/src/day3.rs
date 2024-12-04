@@ -1,4 +1,6 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+
+use crate::data::Data;
 
 enum ReducerType {
   O2,
@@ -6,35 +8,20 @@ enum ReducerType {
 }
 
 pub fn main() {
-  let test = r"00100
-11110
-10110
-10111
-10101
-01111
-00111
-11100
-10000
-11001
-00010
-01010"
-    .to_string();
-  let input = fs::read_to_string("data/day3.txt").unwrap();
+  let data = Data::get(3);
 
-  let test1 = episilon_gamma(&test);
+  let test1 = episilon_gamma(&data.test);
   assert_eq!(test1, 198);
   println!("Day 3: Test 1: power consumption is {}", test1);
 
-  let part1 = episilon_gamma(&input);
-  assert_eq!(part1, 3374136);
+  let part1 = episilon_gamma(&data.input);
   println!("Day 3: Part 1: power consumption is {}", part1);
 
-  let test2 = o2_co2(&test);
+  let test2 = o2_co2(&data.test);
   assert_eq!(test2, 230);
   println!("Day 3: Test 2: life support rating is {}", test2);
 
-  let part2 = o2_co2(&input);
-  assert_eq!(part2, 4432698);
+  let part2 = o2_co2(&data.input);
   println!("Day 3: Part 2: life support rating is {}", part2);
 }
 

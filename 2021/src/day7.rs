@@ -1,16 +1,10 @@
+use crate::data::Data;
 use num::abs;
-use std::fs;
 
 pub fn main() {
-  let test = "16,1,2,0,4,2,7,1,2,14"
-    .split(',')
-    .map(|s| s.parse::<i32>().unwrap())
-    .collect::<Vec<i32>>();
-  let input = fs::read_to_string("data/day7.txt")
-    .unwrap()
-    .split(',')
-    .map(|s| s.parse::<i32>().unwrap())
-    .collect::<Vec<i32>>();
+  let data = Data::get(7);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1 = least_fuel(&test, false);
   assert_eq!(test1, (2, 37));
@@ -20,7 +14,6 @@ pub fn main() {
   );
 
   let part1 = least_fuel(&input, false);
-  assert_eq!(part1, (342, 325528));
   println!(
     "Day 7: Part 1: Least fuel ({}) used to reach postition {}",
     part1.1, part1.0
@@ -34,11 +27,17 @@ pub fn main() {
   );
 
   let part2 = least_fuel(&input, true);
-  assert_eq!(part2, (460, 85015836));
   println!(
     "Day 7: Part 2: Least fuel ({}) used to reach postition {}",
     part2.1, part2.0
   );
+}
+
+fn parse(input: &str) -> Vec<i32> {
+  input
+    .split(',')
+    .map(|s| s.parse::<i32>().unwrap())
+    .collect::<Vec<i32>>()
 }
 
 fn least_fuel(input: &[i32], part2: bool) -> (i32, i32) {

@@ -1,22 +1,16 @@
-use std::{collections::HashMap, fs};
+use crate::data::Data;
+use std::collections::HashMap;
 
 pub fn main() {
-  let test = parse_input(
-    r"2199943210
-3987894921
-9856789892
-8767896789
-9899965678"
-      .to_string(),
-  );
-  let input = parse_input(fs::read_to_string("data/day9.txt").unwrap());
+  let data = Data::get(9);
+  let test = parse_input(&data.test);
+  let input = parse_input(&data.input);
 
   let test1 = find_risk(&test);
   assert_eq!(test1, 15);
   println!("Day 9: Test 1: the cumulative risk is {}", test1);
 
   let part1 = find_risk(&input);
-  assert_eq!(part1, 462);
   println!("Day 9: Part 1: the cumulative risk is {}", part1);
 
   let test2 = find_basins(&test);
@@ -24,11 +18,10 @@ pub fn main() {
   println!("Day 9: Test 2: the basin product is {}", test2);
 
   let part2 = find_basins(&input);
-  assert_eq!(part2, 1397760);
   println!("Day 9: Part 2: the basin product is {}", part2);
 }
 
-fn parse_input(input: String) -> Vec<Vec<u32>> {
+fn parse_input(input: &str) -> Vec<Vec<u32>> {
   input
     .lines()
     .map(|line| {

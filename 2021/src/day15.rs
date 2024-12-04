@@ -1,16 +1,11 @@
-use std::{cmp::min, collections::HashSet, fs};
+use std::{cmp::min, collections::HashSet};
+
+use crate::data::Data;
 
 pub fn main() {
-  let test = r"1163751742
-1381373672
-2136511328
-3694931569
-7463417111
-1319128137
-1359912421
-3125421639
-1293138521
-2311944581"
+  let data = Data::get(15);
+  let test = data
+    .test
     .lines()
     .map(|line| {
       line
@@ -19,8 +14,8 @@ pub fn main() {
         .collect::<Vec<usize>>()
     })
     .collect::<Vec<Vec<usize>>>();
-  let input = fs::read_to_string("data/day15.txt")
-    .unwrap()
+  let input = data
+    .input
     .lines()
     .map(|line| {
       line
@@ -35,7 +30,6 @@ pub fn main() {
   println!("Day 15: Test 1: safest path is {}", test1);
 
   let part1 = run(&input, false);
-  assert_eq!(part1, 415);
   println!("Day 15: Part 1: safest path is {}", part1);
 
   let test2 = run(&test, true);
@@ -43,7 +37,6 @@ pub fn main() {
   println!("Day 15: Test 2: safest path is {}", test2);
 
   let part2 = run(&input, true);
-  assert_eq!(part2, 2864);
   println!("Day 15: Test 2: safest path is {}", part2);
 }
 

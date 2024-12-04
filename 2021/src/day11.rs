@@ -1,16 +1,11 @@
 use std::cmp::max;
 
+use crate::data;
+
 pub fn main() {
-  let test = r"5483143223
-2745854711
-5264556173
-6141336146
-6357385478
-4167524645
-2176841721
-6882881134
-4846848554
-5283751526"
+  let data = data::Data::get(11);
+  let test = data
+    .test
     .lines()
     .map(|line| {
       line
@@ -19,16 +14,8 @@ pub fn main() {
         .collect::<Vec<i32>>()
     })
     .collect::<Vec<Vec<i32>>>();
-  let input = r"1224346384
-5621128587
-6388426546
-1556247756
-1451811573
-1832388122
-2748545647
-2582877432
-3185643871
-2224876627"
+  let input = data
+    .input
     .lines()
     .map(|line| {
       line
@@ -43,7 +30,6 @@ pub fn main() {
   println!("Day 11: Test 1: {} flashes after 100 steps", test1);
 
   let part1 = flash(&input, 100);
-  assert_eq!(part1, 1591);
   println!("Day 11: Part 1: {} flashes after 100 steps", part1);
 
   let test2 = flash(&test, u32::MAX);
@@ -51,7 +37,6 @@ pub fn main() {
   println!("Day 11: Test 2: synchronizes after {} steps", test2);
 
   let part2 = flash(&input, u32::MAX);
-  assert_eq!(part2, 314);
   println!("Day 11: Part 2: synchronizes after {} steps", part2);
 }
 

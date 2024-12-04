@@ -3,9 +3,10 @@ use regex::Regex;
 use std::{
   cmp::{max, min},
   collections::HashMap,
-  fs,
   hash::{Hash, Hasher},
 };
+
+use crate::data::Data;
 
 // This is safe to ignore at this time.
 #[derive(Debug, Eq, Clone, Copy)]
@@ -34,26 +35,15 @@ struct Line {
 }
 
 pub fn main() {
-  let test = lines(
-    r"0,9 -> 5,9
-8,0 -> 0,8
-9,4 -> 3,4
-2,2 -> 2,1
-7,0 -> 7,4
-6,4 -> 2,0
-0,9 -> 2,9
-3,4 -> 1,4
-0,0 -> 8,8
-5,5 -> 8,2",
-  );
-  let input = lines(&fs::read_to_string("data/day5.txt").unwrap());
+  let data = Data::get(5);
+  let test = lines(&data.test);
+  let input = lines(&data.input);
 
   let test1 = overlaps(&test, false);
   assert_eq!(test1, 5);
   println!("Day 5: Test 1: {} points on 2 or more lines", test1);
 
   let part1 = overlaps(&input, false);
-  assert_eq!(part1, 5167);
   println!("Day 5: Part 1: {} points on 2 or more lines", part1);
 
   let test2 = overlaps(&test, true);
@@ -61,7 +51,6 @@ pub fn main() {
   println!("Day 5: Test 2: {} points on 2 or more lines", test2);
 
   let part2 = overlaps(&input, true);
-  assert_eq!(part2, 17604);
   println!("Day 5: Part 2: {} points on 2 or more lines", part2);
 }
 

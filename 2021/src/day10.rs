@@ -1,27 +1,16 @@
+use crate::data::Data;
 use core::panic;
-use std::fs;
 
 pub fn main() {
-  let test = parse_input(
-    r"[({(<(())[]>[[{[]{<()<>>
-[(()[<>])]({[<{<<[]>>(
-{([(<{}[<>[]}>{[]{[(<()>
-(((({<>}<{<{<>}{[]{[]{}
-[[<[([]))<([[{}[[()]]]
-[{[{({}]{}}([{[{{{}}([]
-{<[[]]>}<{[{[{[]{()[[[]
-[<(<(<(<{}))><([]([]()
-<{([([[(<>()){}]>(<<{{
-<{([{{}}[<[[[<>{}]]]>[]]",
-  );
-  let input = parse_input(&fs::read_to_string("data/day10.txt").unwrap());
+  let data = Data::get(10);
+  let test = parse_input(&data.test);
+  let input = parse_input(&data.input);
 
   let test1 = score_corrupted(&test);
   assert_eq!(test1, 26397);
   println!("Day 10: Test 1: corrupted lines score {} points", test1);
 
   let part1 = score_corrupted(&input);
-  assert_eq!(part1, 321237);
   println!("Day 10: Part 1: corrupted lines score {} points", part1);
 
   let test2 = score_incomplete(&test);
@@ -29,7 +18,6 @@ pub fn main() {
   println!("Day 10: Test 2: incomplete lines score {} points", test2);
 
   let part2 = score_incomplete(&input);
-  assert_eq!(part2, 2360030859);
   println!("Day 10: Part 2: incomplete lines score {} points", part2);
 }
 

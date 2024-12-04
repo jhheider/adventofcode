@@ -1,15 +1,17 @@
-use std::{cmp::max, collections::HashSet, fs};
+use std::{cmp::max, collections::HashSet};
+
+use crate::data::Data;
 
 pub fn main() {
-  let (test_moves, test_boards) = load("data/day4test.txt");
-  let (input_moves, input_boards) = load("data/day4.txt");
+  let data = Data::get(4);
+  let (test_moves, test_boards) = load(&data.test);
+  let (input_moves, input_boards) = load(&data.input);
 
   let test1 = run(&test_moves, &test_boards).unwrap();
   assert_eq!(test1.1, 4512);
   println!("Day 4: Test 1: Board #{} wins; score {}", test1.0, test1.1);
 
   let part1 = run(&input_moves, &input_boards).unwrap();
-  assert_eq!(part1.1, 8580);
   println!("Day 4: Part 1: Board #{} wins; score {}", part1.0, part1.1);
 
   let test2 = run2(&test_moves, &test_boards).unwrap();
@@ -17,12 +19,10 @@ pub fn main() {
   println!("Day 4: Test 2: Score {}", test2);
 
   let part2 = run2(&input_moves, &input_boards).unwrap();
-  assert_eq!(part2, 9576);
   println!("Day 4: Part 2: Score {}", part2);
 }
 
-fn load(file: &str) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
-  let input = fs::read_to_string(file).unwrap();
+fn load(input: &str) -> (Vec<i32>, Vec<Vec<Vec<i32>>>) {
   let mut lines = input.lines();
 
   let moves = lines

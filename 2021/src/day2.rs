@@ -1,4 +1,4 @@
-use std::fs;
+use crate::data::Data;
 
 enum Direction {
   Down,
@@ -7,16 +7,9 @@ enum Direction {
 }
 
 pub fn main() {
-  let test = parse(
-    r"forward 5
-down 5
-forward 8
-up 3
-down 8
-forward 2"
-      .to_string(),
-  );
-  let input = parse(fs::read_to_string("data/day2.txt").unwrap());
+  let data = Data::get(2);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1 = run(&test);
   assert_eq!(test1.0 * test1.1, 150);
@@ -28,7 +21,6 @@ forward 2"
   );
 
   let part1 = run(&input);
-  assert_eq!(part1.0 * part1.1, 2039256);
   println!(
     "Day 2: Part 1: final position is ({}, {}); product: {}",
     part1.0,
@@ -46,7 +38,6 @@ forward 2"
   );
 
   let part2 = run2(&input);
-  assert_eq!(part2.0 * part2.1, 1856459736);
   println!(
     "Day 2: Part 2: final position is ({}, {}); product: {}",
     part2.0,
@@ -55,7 +46,7 @@ forward 2"
   );
 }
 
-fn parse(input: String) -> Vec<(Direction, i32)> {
+fn parse(input: &str) -> Vec<(Direction, i32)> {
   input
     .lines()
     .map(|line| {

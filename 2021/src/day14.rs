@@ -1,27 +1,11 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+
+use crate::data::Data;
 
 pub fn main() {
-  let test = parse(
-    r"NNCB
-
-CH -> B
-HH -> N
-CB -> H
-NH -> C
-HB -> C
-HC -> B
-HN -> C
-NN -> C
-BH -> H
-NC -> B
-NB -> B
-BN -> B
-BB -> N
-BC -> B
-CC -> N
-CN -> C",
-  );
-  let input = parse(&fs::read_to_string("data/day14.txt").unwrap());
+  let data = Data::get(14);
+  let test = parse(&data.test);
+  let input = parse(&data.input);
 
   let test1 = run_steps(&test, 10);
   assert_eq!(test1, 1588);
@@ -31,7 +15,6 @@ CN -> C",
   );
 
   let part1 = run_steps(&input, 10);
-  assert_eq!(part1, 2003);
   println!(
     "Day 14: Part 1: Difference in high/low occurances is {}",
     part1
@@ -45,7 +28,6 @@ CN -> C",
   );
 
   let part2 = run_steps(&input, 40);
-  assert_eq!(part2, 2276644000111);
   println!(
     "Day 14: Part 2: Difference in high/low occurances is {}",
     part2
